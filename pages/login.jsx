@@ -5,14 +5,17 @@ import { useAuth } from "../components/AuthContext";
 import Link from "next/dist/client/link";
 import { useRouter } from "next/dist/client/router";
 
-const Signup = () => {
+const Login = () => {
 
     const router = useRouter();
+    
+    const { currentUser, login } = useAuth();
 
-    const [signupForm, setSignupForm] = useState({
+    // if (!currentUser) router.push("/")
+
+    const [loginForm, setLoginForm] = useState({
         email: "",
         password: "",
-        passwordConfirm: "",
     })
 
     const [error, setError] = useState({
@@ -22,25 +25,16 @@ const Signup = () => {
 
     const [disabled, setDisabled] = useState(false);
 
-    const { currentUser, signup } = useAuth();
-    // console.log("signup function?", signup);
-
     const handleFormChange = (event) => {
         console.log(event.target.id);
         const field = event.target.id;
         const value = event.target.value;
-        const modifiedForm = {...signupForm, [field]:value};
-        setSignupForm(modifiedForm);
+        const modifiedForm = {...loginForm, [field]:value};
+        setLoginForm(modifiedForm);
     }
 
     const handleSubmit = async (event) => {
         // console.log("handlesubmit fired")
-        if (signupForm.password !== signupForm.passwordConfirm) {
-            return setError({
-                passwordError: true,
-                passwordErrorMessage: "Entered passwords do not match."
-            })
-        }
 
         setDisabled(true);
         setError({
@@ -49,7 +43,7 @@ const Signup = () => {
         })
 
         try {
-            await signup(signupForm.email, signupForm.password);
+            await login(loginForm.email, loginForm.password);
             router.push("/");
         } 
         catch (error) {
@@ -61,7 +55,7 @@ const Signup = () => {
 
     return (
         <>
-            <h1>signup.jsx</h1>
+            <h1>login.jsx</h1>
             <button onClick={()=>{console.log(currentUser)}}>User Context</button>
             <h1>{currentUser?.email}</h1>
 
@@ -74,7 +68,7 @@ const Signup = () => {
                 id="email"
                 label="email"
                 variant="filled" 
-                value={signupForm.email}
+                value={loginForm.email}
                 helperText="required."
                 onChange={handleFormChange}/>
 
@@ -84,26 +78,16 @@ const Signup = () => {
                 label="password"
                 type="password"
                 variant="filled"
-                value={signupForm.password}
+                value={loginForm.password}
                 error={error.passwordError}
                 helperText={error.passwordErrorMessage}
                 onChange={handleFormChange}/>
 
-                <TextField
-                required
-                id="passwordConfirm"
-                label="confirm password"
-                type="password"
-                variant="filled" 
-                value={signupForm.passwordConfirm}
-                error={error.passwordError}
-                helperText={error.passwordErrorMessage}
-                onChange={handleFormChange}/>
+                <Button disabled={disabled} onClick={handleSubmit} variant="contained">Log In</Button>
 
-                <Button disabled={disabled} onClick={handleSubmit} variant="contained">Sign Up!</Button>
                 <Box>
-                    <Typography variant="subtitle2" display="inline">Already have an account? </Typography>
-                    <Typography variant="subtitle2" color="blue" display="inline"><Link href="/login">Log in here!</Link></Typography>
+                    <Typography variant="subtitle2" display="inline">New user? </Typography>
+                    <Typography variant="subtitle2" color="blue" display="inline"><Link href="/signup">Sign up here!</Link></Typography>
                 </Box>
             </Box>
             
@@ -111,4 +95,4 @@ const Signup = () => {
     )
 }
 
-export default Signup;
+export default Login;
