@@ -65,7 +65,7 @@ const Create = ({test}) => {
           <Box  sx={{width:sidebarWidthCollapsed}}>
           </Box>
           <Box>
-          <h1>Creerwrerwrrwerate.jsx</h1>
+          <h1>Create.jsx</h1>
           <h1>{tab}</h1>
           {renderPage()}
           </Box>
