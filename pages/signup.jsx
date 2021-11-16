@@ -5,6 +5,8 @@ import { useAuth } from "../components/AuthContext";
 import Link from "next/dist/client/link";
 import { useRouter } from "next/dist/client/router";
 import AlreadyLoggedIn from "../components/AlreadyLoggedIn";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"
 
 const Signup = () => {
 
@@ -49,18 +51,38 @@ const Signup = () => {
         })
 
         try {
-            await signup(signupForm.email, signupForm.password);
-            router.push("/");
+            // await signup(signupForm.email, signupForm.password);
+            // toast.success("Success! Logging you in...", {
+            //     position: "top-center",
+            //     autoClose: 1000,
+            // })
+
+            await toast.promise(signup(signupForm.email, signupForm.password), 
+            {
+                pending: "Signing you up...",
+                success: "Success! logging you in...",
+            }, {
+                position: "top-center",
+                autoClose: 500,
+            });
+            setTimeout (() => {
+                router.push("/");
+            }, 500);
         } 
         catch (error) {
-            alert(`${error.message}`)
+            toast.dismiss();
+            toast.error(`${error.message}`, {
+                position: "top-center",
+                autoClose: 4000,
+            })
         }
         setDisabled(false);
 
     }
 
-    if (!currentUser) return (
-        <>
+    const normalPage = () => {
+        return (
+            <>
             <h1>signup.jsx</h1>
             <button onClick={()=>{console.log(currentUser)}}>User Context</button>
             <h1>{currentUser?.email}</h1>
@@ -104,12 +126,15 @@ const Signup = () => {
                     <Typography variant="subtitle2" className="link" display="inline"><Link href="/login">Log in here!</Link></Typography>
                 </Box>
             </Box>
-            
-        </>
-    )
-    else return (
+            </>
+        )
+    }
+
+    return (
         <>
-        <AlreadyLoggedIn/>
+        {currentUser ? <AlreadyLoggedIn/> : normalPage()}
+        
+        <ToastContainer />
         </>
     )
 }

@@ -4,6 +4,7 @@ import { AppBar, Button, Divider, Slide, Toolbar, Typography } from '@mui/materi
 import { useScrollTrigger } from '@mui/material';
 import Link from "next/dist/client/link";
 import { useRouter } from "next/dist/client/router";
+import Image from 'next/image';
 
 export const Appbar = (props) => {
 
@@ -37,12 +38,12 @@ export const Appbar = (props) => {
         <>
       <HideOnScroll {...props}>
         
-        <AppBar>
+        <AppBar position="fixed" sx={{zIndex: (theme) => theme.zIndex.drawer + 1}}>
           <Toolbar sx={{gap:"0em 1em"}}>
-              
-            <Button sx={{color:"white"}}>Create a Character!</Button>
+            <Link href="/"><a><Image src="/dndlogo.png" alt="logo" width="40px" height="40px"/></a></Link>
+            <Link href="/create"><Button sx={{color:"white"}}>Create a Character!</Button></Link>
             <Divider orientation="vertical" variant="middle" flexItem/>
-            <Button sx={{color:"white"}}>My Characters</Button>
+            <Link href="/mychars"><Button sx={{color:"white"}}>My Characters</Button></Link>
             <Divider orientation="vertical" variant="middle" flexItem/>
             <Button sx={{color:"white"}}>Import a Character</Button>
             <Typography variant="h7">{currentUser?.email}</Typography>

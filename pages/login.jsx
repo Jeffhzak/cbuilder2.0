@@ -5,6 +5,8 @@ import { useAuth } from "../components/AuthContext";
 import Link from "next/dist/client/link";
 import { useRouter } from "next/dist/client/router";
 import AlreadyLoggedIn from "../components/AlreadyLoggedIn";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"
 
 const Login = () => {
 
@@ -12,7 +14,7 @@ const Login = () => {
     
     const { currentUser, login } = useAuth();
 
-    // if (!currentUser) router.push("/")
+    // if (currentUser) router.push("/")
 
     const [loginForm, setLoginForm] = useState({
         email: "",
@@ -44,17 +46,33 @@ const Login = () => {
         })
 
         try {
-            await login(loginForm.email, loginForm.password);
-            router.push("/");
+            await toast.promise(
+                login(loginForm.email, loginForm.password),
+                {
+                    pending: "Logging you in...",
+                    success: "Success!",
+                }, {
+                    position: "top-center",
+                    autoClose: 500,
+                });
+            setTimeout (() => {
+                router.push("/");
+            }, 500);
         } 
         catch (error) {
-            alert(`${error.message}`)
+            toast.dismiss();
+            toast.error(`${error.message}`, {
+                position: "top-center",
+                autoClose: 4000,
+            })
         }
         setDisabled(false);
 
     }
-    if (!currentUser) return (
-        <>
+
+    const normalPage = () => {
+        return (
+            <>
             <h1>login.jsx</h1>
             <button onClick={()=>{console.log(currentUser)}}>User Context</button>
             <h1>{currentUser?.email}</h1>
@@ -90,12 +108,14 @@ const Login = () => {
                     <Typography variant="subtitle2" className="link" display="inline"><Link href="/signup">Sign up here!</Link></Typography>
                 </Box>
             </Box>
-            
-        </>
-    )
-    else return (
+            </>
+        )
+    }
+    return (
         <>
-        <AlreadyLoggedIn/>
+        {currentUser ? <AlreadyLoggedIn/> : normalPage()}
+
+        <ToastContainer />
         </>
     )
 }
