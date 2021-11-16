@@ -1,6 +1,6 @@
 import React from 'react'
 import { atom } from 'jotai';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Box } from '@mui/system';
 import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
@@ -11,12 +11,14 @@ import { Background } from '../components/Background/Background';
 import { Stats } from '../components/Stats/Stats';
 import { CharSheet } from '../components/CharSheet/CharSheet';
 import { CharPic } from '../components/CharPic/CharPic';
+import axios from "axios";
+import { classApiGet } from '../components/Class/classApiGet';
 
 const sidebarWidthCollapsed = "5em";
 const tempCharacterAtom = atom({});
 
-const Create = ({test}) => {
-  console.log("test",test);
+const Create = ({allClassInfo}) => {
+  console.log("test",allClassInfo);
   const [collapsed, setCollapsed] = useState(true)
 
   const [tab, setTab] = useState(1);
@@ -36,6 +38,15 @@ const Create = ({test}) => {
     if (tab === 5) return (<CharPic/>);
     if (tab === 6) return (<CharSheet/>);
   }
+
+  // useEffect(() => {
+  //   const axiosTest = async () => {
+  //     // const test = classApiGet("barbarian");
+  //     const test = await axios.get("https://www.dnd5eapi.co/api/classes/wizard")
+  //     console.log("test", test.data);
+  //   }
+  //   axiosTest();
+  // },[])
 
   return (
         <>
@@ -65,7 +76,7 @@ const Create = ({test}) => {
           <Box  sx={{width:sidebarWidthCollapsed}}>
           </Box>
           <Box>
-          <h1>Creerwrerwrrwerate.jsx</h1>
+          <h1>Create.jsx</h1>
           <h1>{tab}</h1>
           {renderPage()}
           </Box>
@@ -77,11 +88,31 @@ const Create = ({test}) => {
 export default Create;
 
 export async function getStaticProps() {
-  return {
 
-    
+  const URL = "https://www.dnd5eapi.co";
+
+  //! Class Info
+  const classRes = await axios.get(`${URL}/api/classes`);
+  const allClassInfo = {};
+  for (const thisClass of classRes.data.results) {
+      const className = thisClass.index;
+      
+      const thisClassInfo = await classApiGet(className);
+      
+      allClassInfo[className] = thisClassInfo;
+  }
+  
+  //! Race Info
+
+  //! Background Info
+
+  //! Stats Info
+
+  //! Skills Info
+
+  return {  
     props: {
-      test: "lol"
+      allClassInfo: allClassInfo,
     }
   }
 }
