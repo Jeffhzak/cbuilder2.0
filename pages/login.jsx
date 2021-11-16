@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useAuth } from "../components/AuthContext";
 import Link from "next/dist/client/link";
 import { useRouter } from "next/dist/client/router";
+import AlreadyLoggedIn from "../components/AlreadyLoggedIn";
 
 const Login = () => {
 
@@ -52,16 +53,13 @@ const Login = () => {
         setDisabled(false);
 
     }
-
-    return (
+    if (!currentUser) return (
         <>
             <h1>login.jsx</h1>
             <button onClick={()=>{console.log(currentUser)}}>User Context</button>
             <h1>{currentUser?.email}</h1>
 
-            <Box component="form" sx={{
-                '& .MuiTextField-root': { m: 1, width: '25ch', display:"block" },
-              }}>
+            <Box component="form" sx={{m: 1, width: '25em', display:"flex", flexDirection:"column", alignItems:"center"}}>
 
                 <TextField
                 required
@@ -84,13 +82,20 @@ const Login = () => {
                 onChange={handleFormChange}/>
 
                 <Button disabled={disabled} onClick={handleSubmit} variant="contained">Log In</Button>
+                <Typography variant="subtitle2" className="link" display="inline"><Link href="/password-reset">Forgot Password?</Link></Typography>
+
 
                 <Box>
                     <Typography variant="subtitle2" display="inline">New user? </Typography>
-                    <Typography variant="subtitle2" color="blue" display="inline"><Link href="/signup">Sign up here!</Link></Typography>
+                    <Typography variant="subtitle2" className="link" display="inline"><Link href="/signup">Sign up here!</Link></Typography>
                 </Box>
             </Box>
             
+        </>
+    )
+    else return (
+        <>
+        <AlreadyLoggedIn/>
         </>
     )
 }

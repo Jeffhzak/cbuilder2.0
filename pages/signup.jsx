@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useAuth } from "../components/AuthContext";
 import Link from "next/dist/client/link";
 import { useRouter } from "next/dist/client/router";
+import AlreadyLoggedIn from "../components/AlreadyLoggedIn";
 
 const Signup = () => {
 
@@ -23,7 +24,6 @@ const Signup = () => {
     const [disabled, setDisabled] = useState(false);
 
     const { currentUser, signup } = useAuth();
-    // console.log("signup function?", signup);
 
     const handleFormChange = (event) => {
         console.log(event.target.id);
@@ -59,15 +59,13 @@ const Signup = () => {
 
     }
 
-    return (
+    if (!currentUser) return (
         <>
             <h1>signup.jsx</h1>
             <button onClick={()=>{console.log(currentUser)}}>User Context</button>
             <h1>{currentUser?.email}</h1>
 
-            <Box component="form" sx={{
-                '& .MuiTextField-root': { m: 1, width: '25ch', display:"block" },
-              }}>
+            <Box component="form" sx={{m: 1, width: '25em', display:"flex", flexDirection:"column", alignItems:"center"}}>
 
                 <TextField
                 required
@@ -103,10 +101,15 @@ const Signup = () => {
                 <Button disabled={disabled} onClick={handleSubmit} variant="contained">Sign Up!</Button>
                 <Box>
                     <Typography variant="subtitle2" display="inline">Already have an account? </Typography>
-                    <Typography variant="subtitle2" color="blue" display="inline"><Link href="/login">Log in here!</Link></Typography>
+                    <Typography variant="subtitle2" className="link" display="inline"><Link href="/login">Log in here!</Link></Typography>
                 </Box>
             </Box>
             
+        </>
+    )
+    else return (
+        <>
+        <AlreadyLoggedIn/>
         </>
     )
 }
