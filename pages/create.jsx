@@ -12,7 +12,6 @@ const Create = () => {
         <> 
         <Drawer
         variant="permanent"
-        open={false}
         sx={{
           width: "15em",
           flexShrink: 0,
@@ -28,29 +27,13 @@ const Create = () => {
               <ListItem>
                   test2
               </ListItem>
-            {/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))} */}
           </List>
           <Divider /> 
           <List>
-            {/* {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))} */}
           </List>
         </Box>
       </Drawer>
-            <h1>Create.jsx</h1>
+            <h1>Creerwrerwrrwerate.jsx</h1>
         </>
     )
 }
