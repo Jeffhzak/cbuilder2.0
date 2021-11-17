@@ -18,14 +18,21 @@ import { backgroundApiGet } from '../components/Background/backgroundApiGet';
 import { statsApiGet, skillsApiGet } from '../components/CharSheet/statsApiGet';
 
 const sidebarWidthCollapsed = "5em";
-const tempCharacterAtom = atom({});
+const tempCharacterAtom = atom({
+  fromClass: {},
+  fromRace: {},
+  fromBackground: {},
+  fromStats: {},
+});
 
 const Create = ({allClassInfo, allRaceInfo, allBackgroundInfo, allStatsInfo, allSkillsInfo}) => {
-  console.log("allClassInfo",allClassInfo);
-  console.log("allRaceInfo",allRaceInfo);
-  console.log("allBackgroundInfo",allBackgroundInfo);
-  console.log("allStatsInfo",allStatsInfo);
-  console.log("allSkillsInfo",allSkillsInfo);
+  const tempFunc = () => {
+    console.log("allClassInfo",allClassInfo);
+    console.log("allRaceInfo",allRaceInfo);
+    console.log("allBackgroundInfo",allBackgroundInfo);
+    console.log("allStatsInfo",allStatsInfo);
+    console.log("allSkillsInfo",allSkillsInfo);
+  }
   const [collapsed, setCollapsed] = useState(true)
 
   const [tab, setTab] = useState(1);
@@ -38,12 +45,12 @@ const Create = ({allClassInfo, allRaceInfo, allBackgroundInfo, allStatsInfo, all
   }
 
   const renderPage = () => {
-    if (tab === 1) return (<Class/>);
-    if (tab === 2) return (<Race/>);
-    if (tab === 3) return (<Background/>);
-    if (tab === 4) return (<Stats/>);
-    if (tab === 5) return (<CharPic/>);
-    if (tab === 6) return (<CharSheet/>);
+    if (tab === 1) return (<Class allClassInfo={allClassInfo}/>);
+    if (tab === 2) return (<Race allRaceInfo={allRaceInfo}/>);
+    if (tab === 3) return (<Background allBackgroundInfo={allBackgroundInfo}/>);
+    if (tab === 4) return (<Stats allStatsInfo={allStatsInfo}/>);
+    if (tab === 5) return (<CharPic />);
+    if (tab === 6) return (<CharSheet />);
   }
 
   return (
@@ -75,7 +82,7 @@ const Create = ({allClassInfo, allRaceInfo, allBackgroundInfo, allStatsInfo, all
           </Box>
           <Box>
           <h1>Create.jsx</h1>
-          <h1>{tab}</h1>
+          <button onClick={tempFunc}>log props</button>
           {renderPage()}
           </Box>
         </Box>

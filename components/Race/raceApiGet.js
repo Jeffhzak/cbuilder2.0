@@ -15,7 +15,7 @@ export const raceApiGet = async (raceName) => {
         const traitInfo = await axios.get(traitsInfoURL);
         traitsInfoArray.push(traitInfo.data);
     } 
-    console.log(traitsInfoArray)
+    // console.log(traitsInfoArray)
 
     baseInfo.traits = traitsInfoArray;
 
