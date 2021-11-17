@@ -1,6 +1,9 @@
-import { Card } from '@mui/material';
+import { Card, CardActionArea, CardContent } from '@mui/material';
+import { Box } from '@mui/system';
 import React from 'react'
 import { useState } from "react"
+import {v4 as uuidv4} from "uuid"
+import { ClassCardMaker } from './ClassCardMaker';
 
 export const Class = ({allClassInfo}) => {
 
@@ -12,20 +15,23 @@ export const Class = ({allClassInfo}) => {
         const classIndexArray = Object.keys(allClassInfo);
         const classCardRender = classIndexArray.map((classIndex) => {
             const thisClassInfo = allClassInfo[classIndex];
+            const thisClassIndex = thisClassInfo.class.index;
             // console.log(thisClassInfo);
 
             return (
-                <Card key={thisClassInfo.class.index+"erwrewr"}>
-                    
-                </Card>
+                <ClassCardMaker key={thisClassIndex+uuidv4()} index={thisClassIndex} setStateFunction={setPlayerClass} />
             )
         })
+
+        return classCardRender;
     }
     return (
 
         <>
             <h1>Class.jsx</h1>
-            {renderClassChoice(allClassInfo)}
+            <Box >
+                {renderClassChoice(allClassInfo)}
+            </Box>
         </>
     )
 }
