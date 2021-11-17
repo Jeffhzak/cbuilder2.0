@@ -1,9 +1,10 @@
-import { Card, CardActionArea, CardContent } from '@mui/material';
+import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react'
 import { useState } from "react"
 import {v4 as uuidv4} from "uuid"
 import { ClassCardMaker } from './ClassCardMaker';
+import { ClassInfo } from './ClassInfo';
 
 export const Class = ({allClassInfo}) => {
 
@@ -29,9 +30,18 @@ export const Class = ({allClassInfo}) => {
 
         <>
             <h1>Class.jsx</h1>
-            <Box >
+            <button onClick={()=>{console.log(playerClass)}}>log class</button>
+            {playerClass.length === 0 
+            ?
+            <>
+            <Typography variant="h4">Select your Class:</Typography>
+            <Box sx={{display: "flex", flexWrap:"wrap"}}>
                 {renderClassChoice(allClassInfo)}
             </Box>
+            </>
+            :
+            <ClassInfo setPlayerClass={setPlayerClass} selectedClassInfo={allClassInfo[playerClass]}/>
+             }
         </>
     )
 }
