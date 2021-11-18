@@ -31,7 +31,7 @@ export const Class = ({allClassInfo}) => {
         <>
             <h1>Class.jsx</h1>
             <button onClick={()=>{console.log(playerClass)}}>log class</button>
-            {playerClass.length === 0 
+            {playerClass?.length === 0 
             ?
             <>
             <Typography variant="h4">Select your Class:</Typography>

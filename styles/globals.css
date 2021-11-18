@@ -18,3 +18,16 @@ a {
 .link {
   color: #4C74B9;
 }
+
+.colStyle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 1em;
+}
+
+.rowStyle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

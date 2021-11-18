@@ -3,8 +3,8 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css';
 import { useAuth } from '../components/AuthContext';
 
-export default function Home() {
 
+export default function Home() {
   const { currentUser } = useAuth();
 
   return (
@@ -18,6 +18,7 @@ export default function Home() {
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js{!!currentUser?.email ? `, ${currentUser?.email}` : null}!</a>
+          <button onClick={()=>{console.log(statsInfo)}}>test</button>
         </h1>
 
         <p className={styles.description}>
@@ -71,3 +72,4 @@ export default function Home() {
     </div>
   )
 }
+

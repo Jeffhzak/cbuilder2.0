@@ -1,6 +1,6 @@
 import React from 'react'
 import { atom } from 'jotai';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Box } from '@mui/system';
 import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
@@ -15,10 +15,10 @@ import axios from "axios";
 import { classApiGet } from '../components/Class/classApiGet';
 import { raceApiGet } from '../components/Race/raceApiGet';
 import { backgroundApiGet } from '../components/Background/backgroundApiGet';
-import { statsApiGet, skillsApiGet } from '../components/CharSheet/statsApiGet';
+import { statsApiGet, skillsApiGet } from '../components/Stats/statsApiGet';
 
 const sidebarWidthCollapsed = "5em";
-const tempCharacterAtom = atom({
+export const tempCharacterAtom = atom({
   fromClass: {},
   fromRace: {},
   fromBackground: {},
@@ -33,6 +33,7 @@ const Create = ({allClassInfo, allRaceInfo, allBackgroundInfo, allStatsInfo, all
     console.log("allStatsInfo",allStatsInfo);
     console.log("allSkillsInfo",allSkillsInfo);
   }
+
   const [collapsed, setCollapsed] = useState(true)
 
   const [tab, setTab] = useState(1);

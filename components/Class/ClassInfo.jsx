@@ -2,9 +2,13 @@ import React from 'react'
 import { Button, Tab, Tabs, Typography } from '@mui/material'
 import { Box } from '@mui/system';
 import { useState } from "react";
+import { ClassFeatures } from './ClassFeatures';
+
+
 export const ClassInfo = ({setPlayerClass, selectedClassInfo}) => {
 
     const [tabValue, setTabValue] = useState(0);
+    const [choices, setChoices] = useState(selectedClassInfo);
 
     const handleChange = (event, newValue) => {
         setTabValue(newValue);
@@ -40,9 +44,10 @@ export const ClassInfo = ({setPlayerClass, selectedClassInfo}) => {
             <h1>ClassInfo.jsx</h1>
             <Button variant="contained" onClick={()=>{setPlayerClass("")}}>Go Back</Button>
             <Button variant="contained" onClick={()=>{console.log(selectedClassInfo)}}>Log ClassInfo</Button>
+            <Button variant="contained" onClick={()=>{console.log(choices)}}>Log Choices</Button>
             <Box sx={{width: "100%"}}>
                 <Typography variant="h5">You selected:</Typography>
-                <Typography variant="h5">The {selectedClassInfo.class.name}</Typography>
+                <Typography variant="h5">The {selectedClassInfo?.class.name}</Typography>
             </Box>
             <Box sx={{ width: '100%' }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -54,7 +59,7 @@ export const ClassInfo = ({setPlayerClass, selectedClassInfo}) => {
                     </Tabs>
                 </Box>
                 <TabPanel value={tabValue} index={0}>
-                    {"hi1"}
+                    <ClassFeatures selectedClassInfo={selectedClassInfo} />
                 </TabPanel>
                 <TabPanel value={tabValue} index={1}>
                     {"hi2"}
