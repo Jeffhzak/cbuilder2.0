@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Tab, Tabs, Typography } from '@mui/material'
 import { Box } from '@mui/system';
-import { useState } from "react";
+import { useState, useLayoutEffect } from "react";
 import { ClassFeatures } from './ClassFeatures';
 import { ClassOptions } from './ClassOptions';
 import { ClassSummary } from './ClassSummary';
@@ -10,7 +10,14 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"
 
 
-export const ClassInfo = ({setPlayerClass, selectedClassInfo}) => {
+export const ClassInfo = ({ playerClass, setPlayerClass, selectedClassInfo }) => {
+    useLayoutEffect(() => {
+      window.scrollTo({
+        top: 0, 
+        left: 0,
+        behavior: "smooth"
+      })
+    }, [playerClass])
 
     const [tabValue, setTabValue] = useState(0);
     const [open, setOpen] = useState(false);
