@@ -18,3 +18,26 @@ a {
 .link {
   color: #4C74B9;
 }
+
+.colStyle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 1em;
+}
+
+.rowStyle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.submitBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400;
+  border: 2px solid #000;
+  box-shadow: 24;
+};

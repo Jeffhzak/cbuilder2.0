@@ -1,6 +1,10 @@
-import { Card } from '@mui/material';
+import { Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import React from 'react'
 import { useState } from "react"
+import {v4 as uuidv4} from "uuid"
+import { ClassCardMaker } from './ClassCardMaker';
+import { ClassInfo } from './ClassInfo';
 
 export const Class = ({allClassInfo}) => {
 
@@ -12,20 +16,32 @@ export const Class = ({allClassInfo}) => {
         const classIndexArray = Object.keys(allClassInfo);
         const classCardRender = classIndexArray.map((classIndex) => {
             const thisClassInfo = allClassInfo[classIndex];
+            const thisClassIndex = thisClassInfo.class.index;
             // console.log(thisClassInfo);
 
             return (
-                <Card key={thisClassInfo.class.index+"erwrewr"}>
-                    
-                </Card>
+                <ClassCardMaker key={thisClassIndex+uuidv4()} index={thisClassIndex} setStateFunction={setPlayerClass} />
             )
         })
+
+        return classCardRender;
     }
     return (
 
         <>
             <h1>Class.jsx</h1>
-            {renderClassChoice(allClassInfo)}
+            <button onClick={()=>{console.log(playerClass)}}>log class</button>
+            {playerClass?.length === 0 
+            ?
+            <>
+            <Typography variant="h4">Select your Class:</Typography>
+            <Box sx={{display: "flex", flexWrap:"wrap"}}>
+                {renderClassChoice(allClassInfo)}
+            </Box>
+            </>
+            :
+            <ClassInfo setPlayerClass={setPlayerClass} selectedClassInfo={allClassInfo[playerClass]}/>
+             }
         </>
     )
 }

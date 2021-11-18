@@ -134,7 +134,7 @@ const Signup = () => {
         <>
         {currentUser ? <AlreadyLoggedIn/> : normalPage()}
         
-        <ToastContainer />
+        <ToastContainer theme="dark"/>
         </>
     )
 }
