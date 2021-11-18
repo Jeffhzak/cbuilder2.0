@@ -75,7 +75,7 @@ const Reset_password = () => {
                     <Typography variant="subtitle2" className="link" display="inline"><Link href="/signup">Sign up here!</Link></Typography>
                 </Box>
             </Box>
-        <ToastContainer />
+        <ToastContainer theme="dark"/>
         </>
     )
 }

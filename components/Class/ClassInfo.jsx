@@ -4,11 +4,16 @@ import { Box } from '@mui/system';
 import { useState } from "react";
 import { ClassFeatures } from './ClassFeatures';
 import { ClassOptions } from './ClassOptions';
+import { ClassSummary } from './ClassSummary';
+import { ClassSubmitBox } from './ClassSubmitBox';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"
 
 
 export const ClassInfo = ({setPlayerClass, selectedClassInfo}) => {
 
     const [tabValue, setTabValue] = useState(0);
+    const [open, setOpen] = useState(false);
     const [choices, setChoices] = useState(
       {
         selectedClassInfo: selectedClassInfo,
@@ -17,6 +22,10 @@ export const ClassInfo = ({setPlayerClass, selectedClassInfo}) => {
     const handleChange = (event, newValue) => {
         setTabValue(newValue);
       };
+
+    const handleSubmitOpen = () => {
+      setOpen(true);
+    }
 
     function TabPanel(props) {
         const { children, value, index, ...other } = props;
@@ -43,6 +52,13 @@ export const ClassInfo = ({setPlayerClass, selectedClassInfo}) => {
           'aria-controls': `simple-tabpanel-${index}`,
         };
       }
+
+      const successToast = () => {
+        toast.success(`Class Successfully Submitted!`, {
+          position: "top-center",
+          autoClose: 4000,
+      })
+      }
     return (
         <>
             <h1>ClassInfo.jsx</h1>
@@ -55,7 +71,7 @@ export const ClassInfo = ({setPlayerClass, selectedClassInfo}) => {
             </Box>
             <Box sx={{ width: '100%' }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Button variant="contained" color="secondary">Submit Selection</Button>
+                <Button onClick={handleSubmitOpen} variant="contained" color="secondary">Submit Selection</Button>
                     <Tabs value={tabValue} onChange={handleChange} aria-label="basic tabs">
                     <Tab label="Features" {...allyProps(0)} />
                     <Tab label="Class Options" {...allyProps(1)} />
@@ -63,15 +79,17 @@ export const ClassInfo = ({setPlayerClass, selectedClassInfo}) => {
                     </Tabs>
                 </Box>
                 <TabPanel value={tabValue} index={0}>
-                    <ClassFeatures selectedClassInfo={selectedClassInfo} />
+                    <ClassFeatures selectedClassInfo={selectedClassInfo} choices={choices} setChoices={setChoices}/>
                 </TabPanel>
                 <TabPanel value={tabValue} index={1}>
                     <ClassOptions selectedClassInfo={selectedClassInfo} choices={choices} setChoices={setChoices}/>
                 </TabPanel>
                 <TabPanel value={tabValue} index={2}>
-                    {"hi3"}
+                    <ClassSummary choices={choices} />
                 </TabPanel>
             </Box>
+            <ClassSubmitBox open={open} setOpen={setOpen} choices={choices} successToast={successToast}/>
+            <ToastContainer theme="dark"/>
         </>
     )
 }

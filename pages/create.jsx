@@ -56,7 +56,7 @@ const Create = ({allClassInfo, allRaceInfo, allBackgroundInfo, allStatsInfo, all
 
   return (
         <>
-        <Box sx={{width:"100%", backgroundColor:"aliceblue", display:"flex"}}>
+        <Box sx={{width:"100%", display:"flex"}}>
           <Box sx={{ height:"95vh", margin:"-1.5em", position:"absolute" }}>
             <ProSidebar
             collapsed={collapsed}
@@ -81,7 +81,7 @@ const Create = ({allClassInfo, allRaceInfo, allBackgroundInfo, allStatsInfo, all
           </Box>
           <Box  sx={{width:sidebarWidthCollapsed}}>
           </Box>
-          <Box sx={{maxWidth:"95%", ml: "5em"}}>
+          <Box sx={{width:"95%", maxWidth:"95%", ml: "2em", mr:"2em"}}>
           <h1>Create.jsx</h1>
           <button onClick={tempFunc}>log props</button>
           {renderPage()}

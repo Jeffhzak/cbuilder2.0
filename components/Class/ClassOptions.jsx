@@ -19,8 +19,6 @@ export const ClassOptions = ({ selectedClassInfo , choices , setChoices }) => {
             )
         })}
         </Box>
-        <Divider/>
-        <Typography variant="h7">test</Typography> 
         </>
     )
 }

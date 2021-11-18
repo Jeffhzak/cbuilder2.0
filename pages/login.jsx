@@ -100,7 +100,7 @@ const Login = () => {
                 onChange={handleFormChange}/>
 
                 <Button disabled={disabled} onClick={handleSubmit} variant="contained">Log In</Button>
-                <Typography variant="subtitle2" className="link" display="inline"><Link href="/password-reset">Forgot Password?</Link></Typography>
+                <Typography variant="subtitle2" className="link" display="inline"><Link href="/reset-password">Forgot Password?</Link></Typography>
 
 
                 <Box>
@@ -115,7 +115,7 @@ const Login = () => {
         <>
         {currentUser ? <AlreadyLoggedIn/> : normalPage()}
 
-        <ToastContainer />
+        <ToastContainer theme="dark"/>
         </>
     )
 }
