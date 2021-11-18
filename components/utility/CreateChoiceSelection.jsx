@@ -25,7 +25,7 @@ export const CreateChoiceSelection = ({choiceObject, choices, setChoices}) => {
 
 
     return (
-        <Box>
+        <Box sx={{mt:"1em", mb:"1em"}}>
             {!!choiceObject ? <Typography variant="h7" sx={{m:"1em"}}>(Pick {choiceLimit})</Typography> : undefined}
             <Box sx={rowStyle}>
             {arrayOfOptions?.map((arrayStep) => {

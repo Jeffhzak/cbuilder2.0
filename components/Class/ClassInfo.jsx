@@ -3,12 +3,16 @@ import { Button, Tab, Tabs, Typography } from '@mui/material'
 import { Box } from '@mui/system';
 import { useState } from "react";
 import { ClassFeatures } from './ClassFeatures';
+import { ClassOptions } from './ClassOptions';
 
 
 export const ClassInfo = ({setPlayerClass, selectedClassInfo}) => {
 
     const [tabValue, setTabValue] = useState(0);
-    const [choices, setChoices] = useState(selectedClassInfo);
+    const [choices, setChoices] = useState(
+      {
+        selectedClassInfo: selectedClassInfo,
+      });
 
     const handleChange = (event, newValue) => {
         setTabValue(newValue);
@@ -62,7 +66,7 @@ export const ClassInfo = ({setPlayerClass, selectedClassInfo}) => {
                     <ClassFeatures selectedClassInfo={selectedClassInfo} />
                 </TabPanel>
                 <TabPanel value={tabValue} index={1}>
-                    {"hi2"}
+                    <ClassOptions selectedClassInfo={selectedClassInfo} choices={choices} setChoices={setChoices}/>
                 </TabPanel>
                 <TabPanel value={tabValue} index={2}>
                     {"hi3"}

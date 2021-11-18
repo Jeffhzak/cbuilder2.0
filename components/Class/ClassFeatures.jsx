@@ -13,7 +13,7 @@ export const ClassFeatures = ({selectedClassInfo}) => {
         })
         return (
             <>
-            <Typography variant="h6" mt="1em">{arrayStep?.name}</Typography>
+            <Typography key={uuidv4()} variant="h6" mt="1em">{arrayStep?.name}</Typography>
             <Divider/>
             {description}
             </>

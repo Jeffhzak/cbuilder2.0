@@ -38,6 +38,7 @@ export const classApiGet = async (className) => {
       hit_die: combinedInfo.hit_die,
       prof_bonus: combinedInfo.prof_bonus,
       proficiencies: combinedInfo.proficiencies,
+      proficiency_choices: combinedInfo.proficiency_choices,
       saving_throws: combinedInfo.saving_throws,
       spellcasting: combinedInfo?.spellcasting ? spellcasting : null, 
     }
