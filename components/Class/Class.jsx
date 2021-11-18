@@ -40,7 +40,7 @@ export const Class = ({allClassInfo}) => {
             </Box>
             </>
             :
-            <ClassInfo setPlayerClass={setPlayerClass} selectedClassInfo={allClassInfo[playerClass]}/>
+            <ClassInfo playerClass={playerClass} setPlayerClass={setPlayerClass} selectedClassInfo={allClassInfo[playerClass]}/>
              }
         </>
     )
