@@ -3,12 +3,14 @@ import React from 'react'
 import {useState, useEffect} from "react"
 
 export default function SelectToggleButton({data, selectedCount, setSelectedCount, limitCap, type, choices, setChoices}) {
-    const inChoices = !!choices?.[type]?.find(x => x === data);
+    // console.log(choices?.[type])
+    const inChoices = !!choices?.[type]?.find(x => x.name === data.name);
     const [selected, setSelected] = useState(inChoices);
 
 
     const handleClick = () => {
-        // console.log(selectedCount);        
+        // console.log(selectedCount);    
+        // console.log(inChoices);    
         if(selectedCount < limitCap) {
             if(selected === false) {
                 setSelectedCount(x=> x+1);

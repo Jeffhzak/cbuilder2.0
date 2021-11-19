@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const RaceSummary = () => {
+export const PBSubmit = () => {
     return (
         <div>
             

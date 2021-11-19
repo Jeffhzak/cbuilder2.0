@@ -4,6 +4,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"
 import { Button, Tab, Tabs, Typography } from '@mui/material'
 import { Box } from '@mui/system';
+import { RaceFeatures } from './tabs/RaceFeatures';
+import { RaceOptions } from './tabs/RaceOptions';
+import { RaceDescription } from './tabs/RaceDescription';
+import { RaceSubmitBox } from './components/RaceSubmitBox';
 
 export const RaceInfo = ({ playerRace, setPlayerRace, selectedRaceInfo }) => {
     
@@ -77,22 +81,22 @@ export const RaceInfo = ({ playerRace, setPlayerRace, selectedRaceInfo }) => {
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Button onClick={handleSubmitOpen} variant="contained" color="secondary">Submit Selection</Button>
                     <Tabs value={tabValue} onChange={handleChange} aria-label="basic tabs">
-                    <Tab label="Features" {...allyProps(0)} />
-                    <Tab label="Race Options" {...allyProps(1)} />
-                    <Tab label="Summary" {...allyProps(2)} />
+                    <Tab label="Description" {...allyProps(0)} />
+                    <Tab label="Features" {...allyProps(1)} />
+                    <Tab label="Race Options" {...allyProps(2)} />
                     </Tabs>
                 </Box>
                 <TabPanel value={tabValue} index={0}>
-                    {/* <ClassFeatures selectedClassInfo={selectedClassInfo} choices={choices} setChoices={setChoices}/> */}
+                    <RaceDescription selectedRaceInfo={selectedRaceInfo} />
                 </TabPanel>
                 <TabPanel value={tabValue} index={1}>
-                    {/* <ClassOptions selectedClassInfo={selectedClassInfo} choices={choices} setChoices={setChoices}/> */}
+                    <RaceFeatures selectedRaceInfo={selectedRaceInfo} choices={choices} setChoices={setChoices} />
                 </TabPanel>
                 <TabPanel value={tabValue} index={2}>
-                    {/* <ClassSummary choices={choices} /> */}
+                    <RaceOptions selectedRaceInfo={selectedRaceInfo} choices={choices} setChoices={setChoices} />
                 </TabPanel>
             </Box>
-            {/* <ClassSubmitBox open={open} setOpen={setOpen} choices={choices} successToast={successToast}/> */}
+            <RaceSubmitBox open={open} setOpen={setOpen} choices={choices} successToast={successToast}/>
             <ToastContainer theme="dark"/>
         </div>
     )
