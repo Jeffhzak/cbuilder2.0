@@ -1,5 +1,5 @@
 import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material';
-import {classTable} from "../../references/classTable";
+import {classTable} from "../../../references/classTable.js";
 import Image from 'next/image';
 import React from 'react';
 

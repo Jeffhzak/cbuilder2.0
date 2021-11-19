@@ -1,7 +1,7 @@
 import { Divider, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
-import { CreateDefaultBtns } from '../utility/CreateDefaultBtns'
+import { CreateDefaultBtns } from '../../utility/CreateDefaultBtns'
 
 export const ClassSummary = ({choices}) => {
     // console.log(choices)

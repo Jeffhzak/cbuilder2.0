@@ -2,9 +2,9 @@ import { Button, Modal, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useAtom } from 'jotai'
 import React from 'react'
-import { tempCharacterAtom } from '../../pages/create'
+import { tempCharacterAtom } from '../../../pages/create.jsx'
     
-export const ClassSubmitBox = ({open, setOpen, choices, successToast}) => {
+export const RaceSubmitBox = ({open, setOpen, choices, successToast}) => {
 
     const [tempCharacter, setTempCharacter] = useAtom(tempCharacterAtom);
 
@@ -17,7 +17,7 @@ export const ClassSubmitBox = ({open, setOpen, choices, successToast}) => {
     const handleSubmit = () => {
         setTempCharacter({
             ...tempCharacter,
-            fromClass: choices,
+            fromRace: choices,
         });
         // alert("submitted!");
         successToast();
@@ -26,7 +26,7 @@ export const ClassSubmitBox = ({open, setOpen, choices, successToast}) => {
 
     return (
         <>
-            <h1>ClassSubmitBox.jsx</h1>
+            <h1>RaceSubmitBox.jsx</h1>
             <button onClick={()=>{console.log(tempCharacter)}}>log characterAtom</button>
             <Modal
             open={open}
@@ -38,7 +38,7 @@ export const ClassSubmitBox = ({open, setOpen, choices, successToast}) => {
                 sx={{p:4, bgcolor: 'background.paper'}}
                 >
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Are you sure you want to submit these Class options?
+                        Are you sure you want to submit these Race options?
                     </Typography>
                     <Button onClick={handleSubmit}>Yes!</Button>
                     <Button onClick={handleSubmitClose}>No, take me back.</Button>
