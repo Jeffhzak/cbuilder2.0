@@ -3,7 +3,7 @@ import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useState } from "react"
 import {v4 as uuidv4} from "uuid"
-import { RaceCardMaker } from './RaceCardMaker';
+import { RaceCardMaker } from './components/RaceCardMaker';
 import { RaceInfo } from './RaceInfo';
 
 

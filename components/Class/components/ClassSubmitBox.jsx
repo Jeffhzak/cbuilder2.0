@@ -2,7 +2,7 @@ import { Button, Modal, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useAtom } from 'jotai'
 import React from 'react'
-import { tempCharacterAtom } from '../../pages/create'
+import { tempCharacterAtom } from '../../../pages/create.jsx'
     
 export const ClassSubmitBox = ({open, setOpen, choices, successToast}) => {
 

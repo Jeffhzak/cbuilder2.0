@@ -3,7 +3,7 @@ import { Box } from '@mui/system';
 import React from 'react'
 import { useState } from "react"
 import {v4 as uuidv4} from "uuid"
-import { ClassCardMaker } from './ClassCardMaker';
+import { ClassCardMaker } from './components/ClassCardMaker';
 import { ClassInfo } from './ClassInfo';
 
 export const Class = ({allClassInfo}) => {

@@ -2,8 +2,8 @@ import { Divider, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
 import {v4 as uuidv4} from "uuid"
-import { CreateChoiceSelection } from '../utility/CreateChoiceSelection'
-import { CreateDefaultBtns } from '../utility/CreateDefaultBtns'
+import { CreateChoiceSelection } from '../../utility/CreateChoiceSelection'
+import { CreateDefaultBtns } from '../../utility/CreateDefaultBtns'
 
 export const ClassFeatures = ({selectedClassInfo, choices, setChoices}) => {
 

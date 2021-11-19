@@ -1,6 +1,6 @@
 import { Divider, Typography } from '@mui/material'
-import { CreateDefaultBtns } from '../utility/CreateDefaultBtns'
-import { CreateChoiceSelection } from '../utility/CreateChoiceSelection'
+import { CreateDefaultBtns } from '../../utility/CreateDefaultBtns'
+import { CreateChoiceSelection } from '../../utility/CreateChoiceSelection'
 import React from 'react'
 import { Box } from '@mui/system'
 

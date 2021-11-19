@@ -2,10 +2,10 @@ import React from 'react'
 import { Button, Tab, Tabs, Typography } from '@mui/material'
 import { Box } from '@mui/system';
 import { useState, useLayoutEffect } from "react";
-import { ClassFeatures } from './ClassFeatures';
-import { ClassOptions } from './ClassOptions';
-import { ClassSummary } from './ClassSummary';
-import { ClassSubmitBox } from './ClassSubmitBox';
+import { ClassFeatures } from './tabs/ClassFeatures';
+import { ClassOptions } from './tabs/ClassOptions';
+import { ClassSummary } from './tabs/ClassSummary';
+import { ClassSubmitBox } from './components/ClassSubmitBox.jsx';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"
 
