@@ -16,6 +16,8 @@ import { classApiGet } from '../components/Class/classApiGet';
 import { raceApiGet } from '../components/Race/raceApiGet';
 import { backgroundApiGet } from '../components/Background/backgroundApiGet';
 import { statsApiGet, skillsApiGet } from '../components/Stats/statsApiGet';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"
 
 const sidebarWidthCollapsed = "5em";
 export const tempCharacterAtom = atom({
@@ -45,13 +47,20 @@ const Create = ({allClassInfo, allRaceInfo, allBackgroundInfo, allStatsInfo, all
     setTab(tabnum);
   }
 
+  const successToast = (textToPrint) => {
+      toast.success(`${textToPrint}`, {
+        position: "top-center",
+        autoClose: 4000,
+    })
+  }
+
   const renderPage = () => {
-    if (tab === 1) return (<Class allClassInfo={allClassInfo}/>);
-    if (tab === 2) return (<Race allRaceInfo={allRaceInfo}/>);
-    if (tab === 3) return (<Background allBackgroundInfo={allBackgroundInfo}/>);
-    if (tab === 4) return (<Stats allStatsInfo={allStatsInfo}/>);
-    if (tab === 5) return (<CharPic />);
-    if (tab === 6) return (<CharSheet />);
+    if (tab === 1) return (<Class allClassInfo={allClassInfo} successToast={successToast}/>);
+    if (tab === 2) return (<Race allRaceInfo={allRaceInfo} successToast={successToast}/>);
+    if (tab === 3) return (<Background allBackgroundInfo={allBackgroundInfo} successToast={successToast}/>);
+    if (tab === 4) return (<Stats allStatsInfo={allStatsInfo} successToast={successToast}/>);
+    if (tab === 5) return (<CharPic successToast={successToast}/>);
+    if (tab === 6) return (<CharSheet successToast={successToast}/>);
   }
 
   return (
@@ -87,6 +96,8 @@ const Create = ({allClassInfo, allRaceInfo, allBackgroundInfo, allStatsInfo, all
           {renderPage()}
           </Box>
         </Box>
+
+        <ToastContainer theme="dark"/>
         </>
     )
 }

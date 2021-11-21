@@ -6,11 +6,9 @@ import { ClassFeatures } from './tabs/ClassFeatures';
 import { ClassOptions } from './tabs/ClassOptions';
 import { ClassSummary } from './tabs/ClassSummary';
 import { ClassSubmitBox } from './components/ClassSubmitBox.jsx';
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"
 
 
-export const ClassInfo = ({ playerClass, setPlayerClass, selectedClassInfo }) => {
+export const ClassInfo = ({ playerClass, setPlayerClass, selectedClassInfo, successToast }) => {
     useLayoutEffect(() => {
       window.scrollTo({
         top: 0, 
@@ -60,12 +58,6 @@ export const ClassInfo = ({ playerClass, setPlayerClass, selectedClassInfo }) =>
         };
       }
 
-      const successToast = () => {
-        toast.success(`Class Successfully Submitted!`, {
-          position: "top-center",
-          autoClose: 4000,
-      })
-      }
     return (
         <>
             <h1>ClassInfo.jsx</h1>
@@ -96,7 +88,6 @@ export const ClassInfo = ({ playerClass, setPlayerClass, selectedClassInfo }) =>
                 </TabPanel>
             </Box>
             <ClassSubmitBox open={open} setOpen={setOpen} choices={choices} successToast={successToast}/>
-            <ToastContainer theme="dark"/>
         </>
     )
 }

@@ -1,7 +1,5 @@
 import React from 'react'
 import { useState, useLayoutEffect } from 'react'
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"
 import { Button, Tab, Tabs, Typography } from '@mui/material'
 import { Box } from '@mui/system';
 import { RaceFeatures } from './tabs/RaceFeatures';
@@ -9,7 +7,7 @@ import { RaceOptions } from './tabs/RaceOptions';
 import { RaceDescription } from './tabs/RaceDescription';
 import { RaceSubmitBox } from './components/RaceSubmitBox';
 
-export const RaceInfo = ({ playerRace, setPlayerRace, selectedRaceInfo }) => {
+export const RaceInfo = ({ playerRace, setPlayerRace, selectedRaceInfo, successToast }) => {
     
     useLayoutEffect(() => {
       window.scrollTo({
@@ -59,13 +57,6 @@ export const RaceInfo = ({ playerRace, setPlayerRace, selectedRaceInfo }) => {
           'aria-controls': `simple-tabpanel-${index}`,
         };
       }
-
-      const successToast = () => {
-        toast.success(`Race Successfully Submitted!`, {
-          position: "top-center",
-          autoClose: 4000,
-      })
-      }
     
     return (
         <div>
@@ -97,7 +88,6 @@ export const RaceInfo = ({ playerRace, setPlayerRace, selectedRaceInfo }) => {
                 </TabPanel>
             </Box>
             <RaceSubmitBox open={open} setOpen={setOpen} choices={choices} successToast={successToast}/>
-            <ToastContainer theme="dark"/>
         </div>
     )
 }

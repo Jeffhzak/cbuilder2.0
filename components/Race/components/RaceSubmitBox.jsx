@@ -20,7 +20,7 @@ export const RaceSubmitBox = ({open, setOpen, choices, successToast}) => {
             fromRace: choices,
         });
         // alert("submitted!");
-        successToast();
+        successToast("Race successfully submitted!");
         setOpen(false);
     }
 

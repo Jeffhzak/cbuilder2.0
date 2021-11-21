@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { StandardArray } from './tabs/StandardArray';
 import { PointBuy } from './tabs/PointBuy';
 
-export const Stats = ({allStatsInfo}) => {
+export const Stats = ({allStatsInfo, successToast}) => {
     
     const [PBorSA, setPBorSA] = useState("");
     const [statsObjPB, setStatsObjPB] = useState({
@@ -29,8 +29,8 @@ export const Stats = ({allStatsInfo}) => {
     const [pbScore, setPbScore] = useState(27);
     
     const renderLogic = () => {
-        if (PBorSA === "SA") return <StandardArray stats={statsObjSA} setStats={setStatsObjSA} statDescriptions={allStatsInfo} standardArray={standardArray} setStandardArray={setStandardArray}/>
-        if (PBorSA === "PB") return <PointBuy stats={statsObjPB} setStats={setStatsObjPB} statDescriptions={allStatsInfo} pbScore={pbScore} setPbScore={setPbScore}/>
+        if (PBorSA === "SA") return <StandardArray stats={statsObjSA} setStats={setStatsObjSA} statDescriptions={allStatsInfo} standardArray={standardArray} setStandardArray={setStandardArray} successToast={successToast}/>
+        if (PBorSA === "PB") return <PointBuy stats={statsObjPB} setStats={setStatsObjPB} statDescriptions={allStatsInfo} pbScore={pbScore} setPbScore={setPbScore} successToast={successToast}/>
 
         }
 

@@ -20,7 +20,7 @@ export const ClassSubmitBox = ({open, setOpen, choices, successToast}) => {
             fromClass: choices,
         });
         // alert("submitted!");
-        successToast();
+        successToast("Class successfully submitted!");
         setOpen(false);
     }
 
