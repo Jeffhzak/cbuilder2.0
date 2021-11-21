@@ -6,7 +6,7 @@ import {v4 as uuidv4} from "uuid"
 import { ClassCardMaker } from './components/ClassCardMaker';
 import { ClassInfo } from './ClassInfo';
 
-export const Class = ({allClassInfo}) => {
+export const Class = ({allClassInfo, successToast}) => {
 
     // console.log("class.jsx", allClassInfo);
     const [playerClass, setPlayerClass] = useState("");
@@ -40,7 +40,7 @@ export const Class = ({allClassInfo}) => {
             </Box>
             </>
             :
-            <ClassInfo playerClass={playerClass} setPlayerClass={setPlayerClass} selectedClassInfo={allClassInfo[playerClass]}/>
+            <ClassInfo playerClass={playerClass} setPlayerClass={setPlayerClass} selectedClassInfo={allClassInfo[playerClass]} successToast={successToast}/>
              }
         </>
     )
