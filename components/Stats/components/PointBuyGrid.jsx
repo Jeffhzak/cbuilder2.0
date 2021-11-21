@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import {  Button, Grid, Typography } from '@mui/material'
 // import StatDesc from './StatDesc';
 import { Box } from '@mui/system';
+import StatDesc from './StatDesc';
 
 
 export default function PointBuyGrid({statName, statDescriptions, stats, setStats, pbScore, setPbScore}) {
@@ -51,8 +52,7 @@ export default function PointBuyGrid({statName, statDescriptions, stats, setStat
     return (
         <Grid container spacing={1} alignItems="center" key={`${statName+"wewewe"}`} mt="1em">
             <Grid item xs={4} s={4} md={1} lg={1}>
-                {/* <StatDesc stat={statName} statDesc={statDescriptions}/> */}
-                <h5>Place</h5>
+                <StatDesc stat={statName} statDesc={statDescriptions}/>
             </Grid>
             <Grid item xs={4} s={4} md={2} lg={1}>
                 <Typography variant="h5" >{statDescriptions[statName]?.name} </Typography>

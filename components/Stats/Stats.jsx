@@ -29,8 +29,8 @@ export const Stats = ({allStatsInfo, successToast}) => {
     const [pbScore, setPbScore] = useState(27);
     
     const renderLogic = () => {
-        if (PBorSA === "SA") return <StandardArray stats={statsObjSA} setStats={setStatsObjSA} statDescriptions={allStatsInfo} standardArray={standardArray} setStandardArray={setStandardArray} successToast={successToast}/>
-        if (PBorSA === "PB") return <PointBuy stats={statsObjPB} setStats={setStatsObjPB} statDescriptions={allStatsInfo} pbScore={pbScore} setPbScore={setPbScore} successToast={successToast}/>
+        if (PBorSA === "SA") return <StandardArray stats={statsObjSA} setStats={setStatsObjSA} statDescriptions={allStatsInfo} standardArray={standardArray} setStandardArray={setStandardArray} successToast={successToast} setPBorSA={setPBorSA}/>
+        if (PBorSA === "PB") return <PointBuy stats={statsObjPB} setStats={setStatsObjPB} statDescriptions={allStatsInfo} pbScore={pbScore} setPbScore={setPbScore} successToast={successToast} setPBorSA={setPBorSA}/>
 
         }
 

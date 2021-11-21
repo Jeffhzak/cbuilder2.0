@@ -18,7 +18,7 @@ const style = {
   };
     
 
-export const PBSubmit = ({open, setOpen, stats, successToast}) => {
+export const StatSubmit = ({open, setOpen, stats, successToast}) => {
 
     const [tempCharacter, setTempCharacter] = useAtom(tempCharacterAtom);
 
