@@ -48,7 +48,7 @@ export const Stats = ({allStatsInfo, successToast}) => {
                     <CardActionArea onClick={() => setPBorSA("SA")}>
                         <CardMedia>
                             <Image 
-                            src={"/placeholder.jpg"} 
+                            src={"/placeholder-image.png"} 
                             height="400px" 
                             width="400px"
                             alt={`standard-array image`}/>
@@ -63,7 +63,7 @@ export const Stats = ({allStatsInfo, successToast}) => {
                     <CardActionArea onClick={() => setPBorSA("PB")}>
                         <CardMedia>
                             <Image 
-                            src={"/placeholder.jpg"} 
+                            src={"/placeholder-image.png"} 
                             height="400px" 
                             width="400px"
                             alt={`point-buy image`}/>
