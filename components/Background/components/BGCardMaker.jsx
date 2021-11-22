@@ -1,17 +1,16 @@
 import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material';
-import {raceTable} from "../../../references/raceTable";
+import {bgTable} from "../../../references/bgTable";
 import Image from 'next/image';
 import React from 'react';
 
-export const RaceCardMaker = ({index, setStateFunction}) => {
-    
-    const setRace = (value) => {
+export const BGCardMaker = ({index, setStateFunction}) => {
+    const setBG = (value) => {
         setStateFunction(value);
     }
 
     return (
         <Card sx={{ maxWidth: "15em", margin:"1em", flexShrink:0 }}>
-            <CardActionArea onClick={() => setRace(index)}>
+            <CardActionArea onClick={() => setBG(index)}>
                 <CardMedia>
                     <Image 
                     // src={classTable[index].iconSrc} 
@@ -21,8 +20,7 @@ export const RaceCardMaker = ({index, setStateFunction}) => {
                     alt={`${index}`}/>
                 </CardMedia>
                 <CardContent>
-                    <Typography gutterBottom variant="subtitle1">{raceTable[index].name}</Typography>
-                    <Typography variant="subtitle1" color="text.secondary">{raceTable[index].desc}</Typography>
+                    <Typography gutterBottom variant="subtitle1">{bgTable[index].name}</Typography>
                 </CardContent>
             </CardActionArea>
         </Card>

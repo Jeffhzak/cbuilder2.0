@@ -11,7 +11,7 @@ export const Race = ({allRaceInfo, successToast}) => {
 
     const [playerRace, setPlayerRace] = useState("");
 
-    const renderClassChoice = (allRaceInfo) => {
+    const renderRaceChoice = (allRaceInfo) => {
         
         const raceIndexArray = Object.keys(allRaceInfo);
         const raceCardRender = raceIndexArray.map((raceIndex) => {
@@ -36,7 +36,7 @@ export const Race = ({allRaceInfo, successToast}) => {
             <>
             <Typography variant="h4">Select your Race:</Typography>
             <Box sx={{display: "flex", flexWrap:"wrap"}}>
-            {renderClassChoice(allRaceInfo)}
+            {renderRaceChoice(allRaceInfo)}
             </Box>
             </>
             :

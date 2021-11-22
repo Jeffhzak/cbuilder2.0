@@ -16,9 +16,9 @@ export const ClassFeatures = ({selectedClassInfo, choices, setChoices}) => {
             )
         })
         return (
-            <>
-            <Typography key={uuidv4()} variant="h6" mt="1em">{arrayStep?.name}</Typography>
-            <Divider key={uuidv4()} />
+            <React.Fragment key={uuidv4()}>
+            <Typography variant="h6" mt="1em">{arrayStep?.name}</Typography>
+            <Divider />
             {description}
             {!!featureSpecificSelector
             ?
@@ -26,7 +26,7 @@ export const ClassFeatures = ({selectedClassInfo, choices, setChoices}) => {
             :
             null
             }
-            </>
+            </React.Fragment>
         )
     })
 

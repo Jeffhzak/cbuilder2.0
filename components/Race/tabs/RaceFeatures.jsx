@@ -21,12 +21,12 @@ export const RaceFeatures = ({selectedRaceInfo, choices, setChoices}) => {
         const currentTraitSelectableOptions = arrayStep?.trait_specific?.subtrait_options
         const featureSpecific = <CreateChoiceSelection choiceObject={currentTraitSelectableOptions} choices={choices} setChoices={setChoices}/>
         return (
-            <>
-            <Typography key={`${arrayStep?.name}`+uuidv4()} variant="h6" mt="1em">{arrayStep?.name}</Typography>
+            <React.Fragment key={`${arrayStep?.name}`+uuidv4()} >
+            <Typography variant="h6" mt="1em">{arrayStep?.name}</Typography>
             <Divider/>
             {featuresText}
             {featureSpecific}
-            </>
+            </React.Fragment>
         )
     })
     const abilityBonusRender = abilityBonusArray?.map((arrayStep) => {
