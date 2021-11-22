@@ -36,7 +36,7 @@ const Signup = () => {
     }
 
     const handleSubmit = async (event) => {
-        // console.log("handlesubmit fired")
+        
         if (signupForm.password !== signupForm.passwordConfirm) {
             return setError({
                 passwordError: true,
@@ -51,11 +51,6 @@ const Signup = () => {
         })
 
         try {
-            // await signup(signupForm.email, signupForm.password);
-            // toast.success("Success! Logging you in...", {
-            //     position: "top-center",
-            //     autoClose: 1000,
-            // })
 
             await toast.promise(signup(signupForm.email, signupForm.password), 
             {

@@ -4,6 +4,8 @@ import { Button, Tab, Tabs, Typography } from '@mui/material'
 import { Box } from '@mui/system';
 import { BGDescription } from './tabs/BGDescription';
 import {bgTable} from "../../references/bgTable";
+import { BGOptions } from './tabs/BGOptions';
+import { BGSubmitBox } from './components/BGSubmitBox';
 
 export const BackgroundInfo = ({playerBG, setPlayerBG, selectedBGInfo, successToast}) => {
     
@@ -17,19 +19,26 @@ export const BackgroundInfo = ({playerBG, setPlayerBG, selectedBGInfo, successTo
     
     useEffect(() => {
         //! mutating values for consistency
-        selectedBGInfo.desc 
-        ? 
-        null 
-        : 
-        selectedBGInfo.desc = bgTable[playerBG].desc;
+
+        if (!!selectedBGInfo.desc === false) {
+            selectedBGInfo.desc = bgTable[playerBG].desc;
+        }
         
-        selectedBGInfo.feature 
-        ? 
-        selectedBGInfo.features = [{...selectedBGInfo.feature}]
-        :
-        null
+        if (!!selectedBGInfo.feature) {
+            selectedBGInfo.features = [{...selectedBGInfo.feature}];
+        }
+
+        if (!!selectedBGInfo.ideals.from[0].desc) {
+            const flattenedArray = selectedBGInfo.ideals.from.map((arrayStep, index) => {
+                return selectedBGInfo.ideals.from[index].desc;
+            })
+
+            delete selectedBGInfo.ideals.from;
+            selectedBGInfo.ideals.from = flattenedArray;
+        }
 
     },[])
+
 
     const [tabValue, setTabValue] = useState(0);
     const [open, setOpen] = useState(false);
@@ -95,10 +104,11 @@ export const BackgroundInfo = ({playerBG, setPlayerBG, selectedBGInfo, successTo
                     <BGDescription selectedBGInfo={selectedBGInfo} />
                 </TabPanel>
                 <TabPanel value={tabValue} index={1}>
-                    {/* <RaceOptions selectedRaceInfo={selectedRaceInfo} choices={choices} setChoices={setChoices} /> */}
+                    <BGOptions selectedBGInfo={selectedBGInfo} choices={choices} setChoices={setChoices} />
                 </TabPanel>
             </Box>
             {/* <RaceSubmitBox open={open} setOpen={setOpen} choices={choices} successToast={successToast}/> */}
+            <BGSubmitBox open={open} setOpen={setOpen} choices={choices} successToast={successToast} />
         </>
     )
 }

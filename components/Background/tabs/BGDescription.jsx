@@ -15,10 +15,10 @@ export const BGDescription = ({selectedBGInfo}) => {
             )
         })
         return (
-            <>
-            <Typography key={uuidv4()} variant="h6" mt="1em">{arrayStep?.name}</Typography>
+            <React.Fragment key={uuidv4()} >
+            <Typography variant="h6" mt="1em">{arrayStep?.name}</Typography>
             {description}
-            </>
+            </React.Fragment>
         )
     })
     return (
