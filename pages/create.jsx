@@ -26,6 +26,7 @@ export const tempCharacterAtom = atom({
   fromBackground: {},
   baseStats: {},
   name: "Placeholder",
+  image_url: "",
 });
 
 const Create = ({allClassInfo, allRaceInfo, allBackgroundInfo, allStatsInfo, allSkillsInfo}) => {
@@ -67,12 +68,13 @@ const Create = ({allClassInfo, allRaceInfo, allBackgroundInfo, allStatsInfo, all
   return (
         <>
         <Box sx={{width:"100%", display:"flex"}}>
-          <Box sx={{ height:"95vh", margin:"-1.5em", position:"absolute"}}>
+          <Box sx={{ height:"130vh", margin:"-1.5em", position:"fixed", mt:"-15vh", zIndex:1000}}>
             <ProSidebar
             collapsed={collapsed}
             width="20em"
             collapsedWidth={sidebarWidthCollapsed}>
-              <Menu iconShape="round" >
+              <Menu iconShape="round"
+              style={{marginTop:"15vh"}} >
                 <MenuItem icon={collapsed ? <ArrowForward/> : <ArrowBack/>} onClick={handleCollapse}>Minimize Sidebar</MenuItem>
               </Menu>
 
