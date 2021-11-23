@@ -1,22 +1,48 @@
 import { useContext, createContext, useState, useEffect } from 'react'
-import { auth } from '../firebase/firebase';
-
+import { auth, findMyCharacters, getUserData } from '../firebase/firebase';
+import {
+    collection,
+    doc,
+    getDoc,
+    getDocs,
+    getFirestore,
+    setDoc,
+    updateDoc,
+    increment,
+    where,
+    query,
+    deleteField,
+  } from "firebase/firestore";
 
 const AuthContext = createContext();
 
 export function useAuth() {
     return useContext(AuthContext);
 }
+
+const db = getFirestore();
+
+
 export const AuthProvider = ({children}) => {
 
     const [currentUser, setCurrentUser] = useState();
-    const [loading, setLoading] = useState(true)
+    const [userData, setUserData] = useState({});
+    const [loading, setLoading] = useState(true);
+    
 
-    const signup = (email, password) => {
+    const signup = async (email, password, user_name) => {
         return auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredentials) => {
+            const lowerEmail = email.toLowerCase();
+            setDoc(doc(db, "users", `${lowerEmail}`), {
+                user_name: `${user_name}`,
+                email: `${lowerEmail}`,
+                uid: userCredentials.user.uid,
+            });
+        })
     }
 
-    const login = (email, password) => {
+    const login = async (email, password) => {
         return auth.signInWithEmailAndPassword(email, password)
     }
 
@@ -29,8 +55,23 @@ export const AuthProvider = ({children}) => {
     }
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(user => {
-            setCurrentUser(user);
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
+            setCurrentUser(user)
+            // console.log("useEffect from authcontext: ", user);
+            
+            //! Pulls userData from firestore
+            if (user) {
+
+                const fetchedUserData = await getUserData(user);
+
+                const characterArray = await findMyCharacters(user);
+                
+                setUserData({
+                    userName: fetchedUserData.user_name,
+                    characters: characterArray,
+                });
+            }
+
             setLoading(false);
         });
 
@@ -40,6 +81,8 @@ export const AuthProvider = ({children}) => {
 
     const value = {
         currentUser,
+        userData,
+        setUserData,
         signup,
         login,
         logout,

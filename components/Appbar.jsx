@@ -5,11 +5,12 @@ import { useScrollTrigger } from '@mui/material';
 import Link from "next/dist/client/link";
 import { useRouter } from "next/dist/client/router";
 import Image from 'next/image';
+import { Box } from '@mui/system';
 
 export const Appbar = (props) => {
 
     const router = useRouter();
-    const { currentUser, logout } = useAuth();
+    const { currentUser, userData, logout } = useAuth();
 
     function HideOnScroll(props) {
         const { children, window } = props;
@@ -40,18 +41,27 @@ export const Appbar = (props) => {
         
         <AppBar position="fixed" sx={{zIndex: (theme) => theme.zIndex.drawer + 1}}>
           <Toolbar sx={{gap:"0em 1em"}}>
+            <Box sx={{width:"40px", height:"40px", flexShrink:0}}>
             <Link href="/"><a><Image src="/dndlogo.png" alt="logo" width="40px" height="40px"/></a></Link>
-            <Link href="/create"><Button sx={{color:"white"}}>Create a Character!</Button></Link>
+            </Box>
+
+            <Link href="/create"><Button sx={{color:"white", flexShrink:0}}>Create a Character!</Button></Link>
             <Divider orientation="vertical" variant="middle" flexItem/>
-            <Link href="/mychars"><Button sx={{color:"white"}}>My Characters</Button></Link>
+            <Link href="/mychars"><Button sx={{color:"white", flexShrink:0}}>My Characters</Button></Link>
             <Divider orientation="vertical" variant="middle" flexItem/>
-            <Button sx={{color:"white"}}>Import a Character</Button>
-            <Typography variant="h7">{currentUser?.email}</Typography>
+            <Button sx={{color:"white", flexShrink:0}}>Import a Character</Button>
+            <button onClick={()=>{console.log(userData)}}>userData</button>
+            <Box sx={{display:"flex", flexDirection:"row-reverse", width:"100%"}}>
             { !!currentUser?.email 
             ?
+            <>
             <Button onClick={handleLogout} sx={{color:"white"}}>Log Out</Button>
+            <Divider orientation="vertical" variant="middle" flexItem/>
+            <Button sx={{color:"white"}} disabled={currentUser?.email ? null : true}>{userData?.userName}</Button>
+            </>
             :
             <Button onClick={()=>{router.push("/login")}} sx={{color:"white"}}>Log In</Button>}
+            </Box>
           </Toolbar>
         </AppBar>
       </HideOnScroll>

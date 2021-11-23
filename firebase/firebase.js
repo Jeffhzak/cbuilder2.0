@@ -1,5 +1,20 @@
 import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
+import {
+    collection,
+    doc,
+    getDoc,
+    getDocs,
+    getFirestore,
+    setDoc,
+    updateDoc,
+    increment,
+    where,
+    query,
+    deleteField,
+  } from "firebase/firestore";
+import {v4 as uuidv4} from "uuid";
+
 
 
 const app = firebase.initializeApp({
@@ -14,5 +29,46 @@ const app = firebase.initializeApp({
 
 
 export const auth = app.auth();
+
+const db = getFirestore();
+
+export const getUserData = async (user) => {
+  const docSnapUser = await getDoc(doc(db, "users", user.email))
+  const userData = docSnapUser.data();
+  return userData;
+}
+
+export const findMyCharacters = async (user) => {
+  const q = query(collection(db, "characters"), where("creator", "==", user.uid))
+  const qSnapshotCharacters = await getDocs(q);
+  const characterArray = [];
+  qSnapshotCharacters.forEach((doc) => {
+      characterArray.push(doc.data());
+  })
+  return characterArray;
+}
+
+export const saveCharacter = async (thisChar, user) => {
+
+  const newUid = uuidv4();
+
+  await setDoc(
+    doc(db, "characters", `${newUid}`), 
+    {
+      ...thisChar,
+      creator: user.uid,
+      uid: newUid,
+    },
+    { merge: false }
+    )
+}
+
+export const updateCharacter = async (character) => {
+  const characterRef = doc(db, "characters", `${character.uid}`);
+
+  await updateDoc(characterRef, {
+    ...character,
+  })
+}
 
 export default app;

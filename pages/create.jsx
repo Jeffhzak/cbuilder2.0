@@ -25,6 +25,7 @@ export const tempCharacterAtom = atom({
   fromRace: {},
   fromBackground: {},
   baseStats: {},
+  name: "Placeholder",
 });
 
 const Create = ({allClassInfo, allRaceInfo, allBackgroundInfo, allStatsInfo, allSkillsInfo}) => {
