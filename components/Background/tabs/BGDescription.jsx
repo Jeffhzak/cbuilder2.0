@@ -9,9 +9,9 @@ export const BGDescription = ({selectedBGInfo}) => {
 
 
     const featureData = selectedBGInfo?.features?.map((arrayStep) => {
-        const description = arrayStep.desc.map((arrayStep) => {
+        const description = arrayStep.desc.map((textblock) => {
             return (
-                <Typography key={uuidv4()} variant="h7">{arrayStep}</Typography>
+                <Typography key={uuidv4()} variant="h7">{textblock}</Typography>
             )
         })
         return (

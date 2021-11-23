@@ -49,7 +49,7 @@ export const Appbar = (props) => {
             <Divider orientation="vertical" variant="middle" flexItem/>
             <Link href="/mychars"><Button sx={{color:"white", flexShrink:0}}>My Characters</Button></Link>
             <Divider orientation="vertical" variant="middle" flexItem/>
-            <Button sx={{color:"white", flexShrink:0}}>Import a Character</Button>
+            <Button sx={{color:"white", flexShrink:0}}>My Custom Options</Button>
             <button onClick={()=>{console.log(userData)}}>userData</button>
             <Box sx={{display:"flex", flexDirection:"row-reverse", width:"100%"}}>
             { !!currentUser?.email 
