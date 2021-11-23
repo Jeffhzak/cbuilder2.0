@@ -7,7 +7,7 @@ import { BGCardMaker } from './components/BGCardMaker';
 import { BackgroundInfo } from './BackgroundInfo';
 
 
-export const Background = ({allBackgroundInfo, successToast}) => {
+export const Background = ({allBackgroundInfo, successToast, setTab}) => {
 
     const [playerBG, setPlayerBG] = useState("");
     
@@ -38,7 +38,7 @@ export const Background = ({allBackgroundInfo, successToast}) => {
             </Box>
             </>
             :
-            <BackgroundInfo playerBG={playerBG} setPlayerBG={setPlayerBG} selectedBGInfo={allBackgroundInfo[playerBG]} successToast={successToast}/> 
+            <BackgroundInfo playerBG={playerBG} setPlayerBG={setPlayerBG} selectedBGInfo={allBackgroundInfo[playerBG]} successToast={successToast} setTab={setTab}/> 
             }
         </>
     )

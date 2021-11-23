@@ -4,7 +4,7 @@ import { useAtom } from 'jotai'
 import React from 'react'
 import { tempCharacterAtom } from '../../../pages/create.jsx'
 
-export const BGSubmitBox = ({open, setOpen, choices, successToast}) => {
+export const BGSubmitBox = ({open, setOpen, choices, successToast, setTab}) => {
 
     const [tempCharacter, setTempCharacter] = useAtom(tempCharacterAtom);
 
@@ -19,6 +19,7 @@ export const BGSubmitBox = ({open, setOpen, choices, successToast}) => {
         });
         
         successToast("Background successfully submitted!");
+        setTab(6);
         setOpen(false);
     }
     return (

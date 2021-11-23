@@ -8,7 +8,7 @@ import { ClassSummary } from './tabs/ClassSummary';
 import { ClassSubmitBox } from './components/ClassSubmitBox.jsx';
 
 
-export const ClassInfo = ({ playerClass, setPlayerClass, selectedClassInfo, successToast }) => {
+export const ClassInfo = ({ playerClass, setPlayerClass, selectedClassInfo, successToast, setTab }) => {
     useLayoutEffect(() => {
       window.scrollTo({
         top: 0, 
@@ -87,7 +87,7 @@ export const ClassInfo = ({ playerClass, setPlayerClass, selectedClassInfo, succ
                     <ClassSummary choices={choices} />
                 </TabPanel>
             </Box>
-            <ClassSubmitBox open={open} setOpen={setOpen} choices={choices} successToast={successToast}/>
+            <ClassSubmitBox open={open} setOpen={setOpen} choices={choices} successToast={successToast} setTab={setTab}/>
         </>
     )
 }

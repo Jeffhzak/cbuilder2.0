@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css"
 import { SAGrid } from '../components/SAGrid';
 import { StatSubmit } from '../components/StatSubmit';
 
-export const StandardArray = ({stats, setStats, statDescriptions, standardArray, setStandardArray, successToast, setPBorSA}) => {
+export const StandardArray = ({stats, setStats, statDescriptions, standardArray, setStandardArray, successToast, setPBorSA, setTab}) => {
 
     const [open, setOpen] = useState(false);
     
@@ -44,7 +44,7 @@ export const StandardArray = ({stats, setStats, statDescriptions, standardArray,
             <h3>StandardArray.jsx</h3>
             {renderGrid()}
             <Button variant="contained" onClick={handleSubmit}>Submit</Button>
-            <StatSubmit open={open} setOpen={setOpen} stats={stats} successToast={successToast}/>
+            <StatSubmit open={open} setOpen={setOpen} stats={stats} successToast={successToast} setTab={setTab}/>
 
             <ToastContainer theme="dark"/>
         </>

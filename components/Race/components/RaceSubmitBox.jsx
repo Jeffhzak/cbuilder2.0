@@ -4,7 +4,7 @@ import { useAtom } from 'jotai'
 import React from 'react'
 import { tempCharacterAtom } from '../../../pages/create.jsx'
     
-export const RaceSubmitBox = ({open, setOpen, choices, successToast}) => {
+export const RaceSubmitBox = ({open, setOpen, choices, successToast, setTab}) => {
 
     const [tempCharacter, setTempCharacter] = useAtom(tempCharacterAtom);
 
@@ -21,6 +21,7 @@ export const RaceSubmitBox = ({open, setOpen, choices, successToast}) => {
         });
         // alert("submitted!");
         successToast("Race successfully submitted!");
+        setTab(6);
         setOpen(false);
     }
 

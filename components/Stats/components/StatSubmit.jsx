@@ -18,7 +18,7 @@ const style = {
   };
     
 
-export const StatSubmit = ({open, setOpen, stats, successToast}) => {
+export const StatSubmit = ({open, setOpen, stats, successToast, setTab}) => {
 
     const [tempCharacter, setTempCharacter] = useAtom(tempCharacterAtom);
 
@@ -33,6 +33,7 @@ export const StatSubmit = ({open, setOpen, stats, successToast}) => {
         });
         
         successToast("Stats successfully submitted!");
+        setTab(6);
         setOpen(false);
     }
     return (
