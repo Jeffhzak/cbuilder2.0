@@ -56,18 +56,18 @@ const Create = ({allClassInfo, allRaceInfo, allBackgroundInfo, allStatsInfo, all
   }
 
   const renderPage = () => {
-    if (tab === 1) return (<Class allClassInfo={allClassInfo} successToast={successToast}/>);
-    if (tab === 2) return (<Race allRaceInfo={allRaceInfo} successToast={successToast}/>);
-    if (tab === 3) return (<Background allBackgroundInfo={allBackgroundInfo} successToast={successToast}/>);
-    if (tab === 4) return (<Stats allStatsInfo={allStatsInfo} successToast={successToast}/>);
-    if (tab === 5) return (<CharPic successToast={successToast}/>);
-    if (tab === 6) return (<CharSheet successToast={successToast}/>);
+    if (tab === 1) return (<Class allClassInfo={allClassInfo} successToast={successToast} setTab={setTab}/>);
+    if (tab === 2) return (<Race allRaceInfo={allRaceInfo} successToast={successToast} setTab={setTab}/>);
+    if (tab === 3) return (<Background allBackgroundInfo={allBackgroundInfo} successToast={successToast} setTab={setTab}/>);
+    if (tab === 4) return (<Stats allStatsInfo={allStatsInfo} successToast={successToast} setTab={setTab}/>);
+    if (tab === 5) return (<CharPic successToast={successToast} setTab={setTab}/>);
+    if (tab === 6) return (<CharSheet successToast={successToast} setTab={setTab}/>);
   }
 
   return (
         <>
         <Box sx={{width:"100%", display:"flex"}}>
-          <Box sx={{ height:"95vh", margin:"-1.5em", position:"absolute" }}>
+          <Box sx={{ height:"95vh", margin:"-1.5em", position:"absolute"}}>
             <ProSidebar
             collapsed={collapsed}
             width="20em"

@@ -7,7 +7,7 @@ import { RaceOptions } from './tabs/RaceOptions';
 import { RaceDescription } from './tabs/RaceDescription';
 import { RaceSubmitBox } from './components/RaceSubmitBox';
 
-export const RaceInfo = ({ playerRace, setPlayerRace, selectedRaceInfo, successToast }) => {
+export const RaceInfo = ({ playerRace, setPlayerRace, selectedRaceInfo, successToast, setTab }) => {
     
     useLayoutEffect(() => {
       window.scrollTo({
@@ -87,7 +87,7 @@ export const RaceInfo = ({ playerRace, setPlayerRace, selectedRaceInfo, successT
                     <RaceOptions selectedRaceInfo={selectedRaceInfo} choices={choices} setChoices={setChoices} />
                 </TabPanel>
             </Box>
-            <RaceSubmitBox open={open} setOpen={setOpen} choices={choices} successToast={successToast}/>
+            <RaceSubmitBox open={open} setOpen={setOpen} choices={choices} successToast={successToast} setTab={setTab}/>
         </div>
     )
 }

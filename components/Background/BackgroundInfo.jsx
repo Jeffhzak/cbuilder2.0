@@ -7,7 +7,7 @@ import {bgTable} from "../../references/bgTable";
 import { BGOptions } from './tabs/BGOptions';
 import { BGSubmitBox } from './components/BGSubmitBox';
 
-export const BackgroundInfo = ({playerBG, setPlayerBG, selectedBGInfo, successToast}) => {
+export const BackgroundInfo = ({playerBG, setPlayerBG, selectedBGInfo, successToast, setTab}) => {
     
     useLayoutEffect(() => {
       window.scrollTo({
@@ -107,8 +107,8 @@ export const BackgroundInfo = ({playerBG, setPlayerBG, selectedBGInfo, successTo
                     <BGOptions selectedBGInfo={selectedBGInfo} choices={choices} setChoices={setChoices} />
                 </TabPanel>
             </Box>
-            {/* <RaceSubmitBox open={open} setOpen={setOpen} choices={choices} successToast={successToast}/> */}
-            <BGSubmitBox open={open} setOpen={setOpen} choices={choices} successToast={successToast} />
+            
+            <BGSubmitBox open={open} setOpen={setOpen} choices={choices} successToast={successToast} setTab={setTab}/>
         </>
     )
 }

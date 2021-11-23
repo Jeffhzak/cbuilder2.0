@@ -7,7 +7,7 @@ import { RaceCardMaker } from './components/RaceCardMaker';
 import { RaceInfo } from './RaceInfo';
 
 
-export const Race = ({allRaceInfo, successToast}) => {
+export const Race = ({allRaceInfo, successToast, setTab}) => {
 
     const [playerRace, setPlayerRace] = useState("");
 
@@ -40,7 +40,7 @@ export const Race = ({allRaceInfo, successToast}) => {
             </Box>
             </>
             :
-            <RaceInfo playerRace={playerRace} setPlayerRace={setPlayerRace} selectedRaceInfo={allRaceInfo[playerRace]} successToast={successToast}/>
+            <RaceInfo playerRace={playerRace} setPlayerRace={setPlayerRace} selectedRaceInfo={allRaceInfo[playerRace]} successToast={successToast} setTab={setTab}/>
             }
         </>
     )

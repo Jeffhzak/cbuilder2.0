@@ -8,7 +8,7 @@ import PointBuyGrid from '../components/PointBuyGrid'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"
 
-export const PointBuy = ({stats, setStats, statDescriptions, pbScore, setPbScore, successToast, setPBorSA}) => {
+export const PointBuy = ({stats, setStats, statDescriptions, pbScore, setPbScore, successToast, setPBorSA, setTab}) => {
 
 
     const [open, setOpen] = useState(false);
@@ -50,7 +50,7 @@ export const PointBuy = ({stats, setStats, statDescriptions, pbScore, setPbScore
 
             <Button variant="contained" sx={{mt: "2em"}} onClick={handleSubmit}>Submit</Button>
 
-            <StatSubmit open={open} setOpen={setOpen} stats={stats} successToast={successToast}/>
+            <StatSubmit open={open} setOpen={setOpen} stats={stats} successToast={successToast} setTab={setTab}/>
 
             <ToastContainer theme="dark"/>
         </>
