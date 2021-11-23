@@ -14,6 +14,7 @@ const Signup = () => {
 
     const [signupForm, setSignupForm] = useState({
         email: "",
+        display_name: "",
         password: "",
         passwordConfirm: "",
     })
@@ -28,7 +29,7 @@ const Signup = () => {
     const { currentUser, signup } = useAuth();
 
     const handleFormChange = (event) => {
-        console.log(event.target.id);
+        // console.log(event.target.id);
         const field = event.target.id;
         const value = event.target.value;
         const modifiedForm = {...signupForm, [field]:value};
@@ -52,7 +53,7 @@ const Signup = () => {
 
         try {
 
-            await toast.promise(signup(signupForm.email, signupForm.password), 
+            await toast.promise(signup(signupForm.email, signupForm.password, signupForm.display_name), 
             {
                 pending: "Signing you up...",
                 success: "Success! logging you in...",
@@ -90,6 +91,15 @@ const Signup = () => {
                 label="email"
                 variant="filled" 
                 value={signupForm.email}
+                helperText="required."
+                onChange={handleFormChange}/>
+
+                <TextField
+                required
+                id="display_name"
+                label="display name"
+                variant="filled" 
+                value={signupForm.display_name}
                 helperText="required."
                 onChange={handleFormChange}/>
 

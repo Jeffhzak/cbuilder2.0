@@ -18,7 +18,7 @@ export default function Home() {
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js{!!currentUser?.email ? `, ${currentUser?.email}` : null}!</a>
-          <button onClick={()=>{console.log(statsInfo)}}>test</button>
+          <button onClick={()=>{console.log(currentUser)}}>log current user</button>
         </h1>
 
         <p className={styles.description}>

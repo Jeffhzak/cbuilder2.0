@@ -113,7 +113,7 @@ const Login = () => {
     }
     return (
         <>
-        {currentUser ? <><AlreadyLoggedIn/><button onClick={()=>{console.log(currentUser._delegate)}}>test</button></> : normalPage()}
+        {currentUser ? <AlreadyLoggedIn/> : normalPage()}
 
         <ToastContainer theme="dark"/>
         </>
