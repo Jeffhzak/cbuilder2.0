@@ -17,8 +17,8 @@ export const FromStats = ({tempCharacter, conMod, setConMod}) => {
     : undefined;
 
     const L1HP = !!tempCharacter?.fromClass
-    ?.selectedClassInfo.hit_die ? tempCharacter?.fromClass
-    ?.selectedClassInfo.hit_die : undefined;
+    ?.selectedClassInfo?.hit_die ? tempCharacter?.fromClass
+    ?.selectedClassInfo?.hit_die : 0;
 
     return (
         <>
