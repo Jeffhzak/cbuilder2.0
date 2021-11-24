@@ -3,6 +3,7 @@ import { AuthProvider, useAuth } from '../components/AuthContext'
 import { Appbar } from '../components/Appbar'
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { Box } from '@mui/system';
 
 function MyApp({ Component, pageProps }) {
 
@@ -16,9 +17,9 @@ function MyApp({ Component, pageProps }) {
     <AuthProvider>
       <CssBaseline/>
       <Appbar />
-      <div style={{margin:"1em"}}>
+      <Box sx={{m:"1em", mb:"10%"}}>
       <Component {...pageProps} />
-      </div>
+      </Box>
     </AuthProvider>
     </ThemeProvider>
   )
