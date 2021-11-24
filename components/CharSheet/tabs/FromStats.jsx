@@ -22,7 +22,6 @@ export const FromStats = ({tempCharacter, conMod, setConMod}) => {
 
     return (
         <>
-            <h1>FromStats.jsx</h1>
             <Box sx={{display:"flex", justifyContent:"flex-end", alignItems:"center", maxWidth:"40em"}}>
                 <Button sx={{m:"1em", flexGrow:0, mr:"auto"}} variant="outlined">Stats gained from Racial Bonuses</Button>
                 <div style={{display:"flex", border:"1px solid white", padding:"0.5em"}}>

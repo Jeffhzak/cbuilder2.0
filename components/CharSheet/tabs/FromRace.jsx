@@ -11,8 +11,7 @@ export const FromRace = ({tempCharacter}) => {
 
     const featDescriptionArray = selectedRaceInfo?.traits;
     const abilityBonusArray = selectedRaceInfo?.ability_bonuses;
-    const abilityBonusOptions = selectedRaceInfo?.ability_bonus_options;
-    const speed = selectedRaceInfo.speed;
+    const speed = selectedRaceInfo?.speed;
 
     const featuresRender = () => {
         return featDescriptionArray?.map((arrayStep) => {
@@ -21,8 +20,7 @@ export const FromRace = ({tempCharacter}) => {
                     <Typography key={`${innerStep}`+uuidv4()} variant="h7">{innerStep}</Typography>
                 )
             })
-            // const currentTraitSelectableOptions = arrayStep?.trait_specific?.subtrait_options
-            // const featureSpecific = <CreateChoiceSelection choiceObject={currentTraitSelectableOptions} choices={choices} setChoices={setChoices}/>
+            
             return (
                 <React.Fragment key={`${arrayStep?.name}`+uuidv4()} >
                 <Typography variant="h6" mt="1em">{arrayStep?.name}</Typography>
@@ -42,19 +40,10 @@ export const FromRace = ({tempCharacter}) => {
         });
     }
 
-    // const abilityBonusOptionsRender = !!abilityBonusOptions ? <>
-    // <Typography variant="h6" mt="1em">
-    //     Ability Score bonus options
-    // </Typography>
-    // <Typography variant="subtitle2">This race gets an option to choose which stat to increase.</Typography>
-    // <Divider/>
-    // <CreateStatChoice choiceObject={abilityBonusOptions} choices={choices} setChoices={setChoices}/>
-    // </>
-    // : undefined;
-
     return (
         <>
-            <h1>RaceFeatures.jsx</h1>
+            {selectedRaceInfo
+            ?
             <Box className="colStyle">
                 <Typography variant="h6" mt="1em">
                     Ability Score Bonuses
@@ -72,6 +61,10 @@ export const FromRace = ({tempCharacter}) => {
                 </Typography>
                 {featuresRender()}
             </Box>
+            :
+            <Typography variant="h6" mt="1em">{`You haven't selected a race!`}</Typography>
+            }
+            
         </>
     )
 }
