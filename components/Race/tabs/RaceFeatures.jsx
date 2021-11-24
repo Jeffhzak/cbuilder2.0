@@ -12,29 +12,36 @@ export const RaceFeatures = ({selectedRaceInfo, choices, setChoices}) => {
     const abilityBonusOptions = selectedRaceInfo?.ability_bonus_options;
     const speed = selectedRaceInfo.speed;
 
-    const featuresRender = featDescriptionArray?.map((arrayStep) => {
-        const featuresText = arrayStep?.desc?.map((innerStep) => {
+    const featuresRender = () => {
+        return featDescriptionArray?.map((arrayStep) => {
+            const featuresText = arrayStep?.desc?.map((innerStep) => {
+                return (
+                    <Typography key={`${innerStep}`+uuidv4()} variant="h7">{innerStep}</Typography>
+                )
+            })
+            const currentTraitSelectableOptions = arrayStep?.trait_specific?.subtrait_options
+            
+            const featureSpecific = <CreateChoiceSelection choiceObject={currentTraitSelectableOptions} choices={choices} setChoices={setChoices}/>
+
             return (
-                <Typography key={`${innerStep}`+uuidv4()} variant="h7">{innerStep}</Typography>
+                <React.Fragment key={`${arrayStep?.name}`+uuidv4()} >
+                <Typography variant="h6" mt="1em">{arrayStep?.name}</Typography>
+                <Divider/>
+                {featuresText}
+                {!!currentTraitSelectableOptions ? featureSpecific : null}
+                </React.Fragment>
             )
         })
-        const currentTraitSelectableOptions = arrayStep?.trait_specific?.subtrait_options
-        const featureSpecific = <CreateChoiceSelection choiceObject={currentTraitSelectableOptions} choices={choices} setChoices={setChoices}/>
-        return (
-            <React.Fragment key={`${arrayStep?.name}`+uuidv4()} >
-            <Typography variant="h6" mt="1em">{arrayStep?.name}</Typography>
-            <Divider/>
-            {featuresText}
-            {featureSpecific}
-            </React.Fragment>
-        )
-    })
-    const abilityBonusRender = abilityBonusArray?.map((arrayStep) => {
+    }
+    const abilityBonusRender = () => {
+        
+        return abilityBonusArray?.map((arrayStep) => {
 
-        return (
-            <Button key={`${arrayStep.ability_score.url}`+uuidv4()} variant="contained" color="success" sx={{m:"0.5em"}}>{arrayStep.ability_score.name} + {arrayStep.bonus}</Button>
-        )
-    });
+            return (
+                <Button key={`${arrayStep.ability_score.url}`+uuidv4()} variant="contained" color="success" sx={{m:"0.5em"}}>{arrayStep.ability_score.name} + {arrayStep.bonus}</Button>
+            )
+        });
+    }
 
     const abilityBonusOptionsRender = !!abilityBonusOptions ? <>
     <Typography variant="h6" mt="1em">
@@ -54,7 +61,7 @@ export const RaceFeatures = ({selectedRaceInfo, choices, setChoices}) => {
                     Ability Score Bonuses
                 </Typography>
                 <Box>
-                    {abilityBonusRender}
+                    {abilityBonusRender()}
                 </Box>
                 {abilityBonusOptionsRender}
                 <Typography variant="h6" mt="1em">
@@ -64,7 +71,7 @@ export const RaceFeatures = ({selectedRaceInfo, choices, setChoices}) => {
                 <Typography variant="h7">
                     Your Speed is {speed}.
                 </Typography>
-                {featuresRender}
+                {featuresRender()}
             </Box>
         </>
     )

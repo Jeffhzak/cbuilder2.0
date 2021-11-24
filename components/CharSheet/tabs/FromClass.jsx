@@ -1,9 +1,85 @@
+import { Divider, Typography } from '@mui/material'
+import { Box } from '@mui/system'
 import React from 'react'
+import {v4 as uuidv4} from "uuid"
+import { CreateDefaultBtns } from '../../utility/CreateDefaultBtns'
 
 export const FromClass = ({tempCharacter}) => {
+
+    const classSelected = !!tempCharacter?.fromClass?.selectedClassInfo;
+
+    const selectedClassInfo = tempCharacter?.fromClass?.selectedClassInfo;
+
+    const spellCaster = selectedClassInfo?.spellcasting;
+
+    const spellcastingData = () => {
+        const spellcastRender = spellCaster.info.map((infoBlock) => {
+            const description = infoBlock.desc.map((arrayStep) => {
+                return (
+                    <Box key={uuidv4()}>
+                    <Typography key={uuidv4()} variant="h7">{arrayStep}</Typography>
+                    </Box>
+                )
+            })
+            return (
+                <React.Fragment key={uuidv4()}>
+                <Typography variant="h6" mt="1em">{infoBlock?.name}</Typography>
+                {description}
+                </React.Fragment>
+                );
+        })
+        return (
+            <>
+            <Typography variant="h6" mt="1em">Spellcasting:</Typography>
+            <Divider />
+            {spellcastRender}
+            </>
+        )
+    }
+    const renderFeatures = () => {
+
+        const featureData = selectedClassInfo?.features?.map((arrayStep) => {
+            const description = arrayStep.desc.map((arrayStep) => {
+                return (
+                    <Typography key={uuidv4()} variant="h7">{arrayStep}</Typography>
+                )
+            })
+            return (
+                <React.Fragment key={uuidv4()}>
+                <Typography variant="h6" mt="1em">{arrayStep?.name}</Typography>
+                <Divider />
+                {description}
+                </React.Fragment>
+            )
+        })
+
+        return featureData;
+    }
+
     return (
-        <div>
-            
-        </div>
+        <>
+        {classSelected
+        ?
+        <Box className="colStyle">
+            {/* <Button onClick={()=>{console.log(levelData)}}>levelData</Button> */}
+            <Typography variant="h5" mt="1em">Features at Level 1:</Typography>
+            <Typography variant="h6" mt="1em">Hit Points (HP)</Typography>
+            <Divider/>
+            <Typography variant="h7">Hit Dice: 1d{selectedClassInfo?.hit_die}</Typography>
+            <Typography variant="h7">Hit Points at 1st Level: {selectedClassInfo?.hit_die} + your Constitution modifier
+            </Typography>
+            <Typography variant="h7">Hit Points at Higher Levels: 1d{selectedClassInfo?.hit_die} (or {Math.round(selectedClassInfo?.hit_die / 2 + 0.5)}) + your Constitution modifier per {selectedClassInfo?.name} level after 1st
+            </Typography>
+            <Typography variant="h6" mt="1em">Saving Throws:</Typography>
+            <Divider/>
+            <Typography variant="h7">You are proficient in the following saving throws:</Typography>
+            <CreateDefaultBtns inputArray={selectedClassInfo.saving_throws} />
+            {spellCaster ? spellcastingData() : null}
+            {renderFeatures()}
+        </Box>
+        :
+        <Typography variant="h6" mt="1em">{`You haven't selected a class!`}</Typography>
+        }
+        </>
     )
 }

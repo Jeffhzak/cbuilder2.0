@@ -9,6 +9,7 @@ export const SummaryCard = ({characterData, setTempCharacter}) => {
 
     const charName = characterData?.name;
     const charRace = characterData?.fromRace?.selectedRaceInfo?.name ?? "<Race>";
+    const RaceTrait = characterData?.fromRace?.trait?.[0]?.name;
     const charClass = characterData?.fromClass?.selectedClassInfo?.class?.name ?? "<Class>";
     const portraitURL = characterData?.image_url;
 
@@ -36,8 +37,11 @@ export const SummaryCard = ({characterData, setTempCharacter}) => {
             <Box sx={{ display: 'flex', flexDirection: 'column', ml:"2em" }}>
                 <CardContent sx={{ flex: '1 0 auto' }}>
                 <NameFieldEditor charName={charName} setTempCharacter={setTempCharacter} />
-                <Typography variant="subtitle1" color="text.secondary" component="div">
+                <Typography variant="subtitle1" color="text.secondary" component="div" sx={{wordWrap:"break-word"}}>
                     {`${charRace} ${charClass}`}
+                </Typography>
+                <Typography variant="subtitle1" color="text.secondary" component="div" sx={{wordWrap:"break-word"}}>
+                    {RaceTrait ? `${RaceTrait}` : null}
                 </Typography>
                 </CardContent>
             </Box>
