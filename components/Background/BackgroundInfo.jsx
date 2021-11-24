@@ -17,6 +17,7 @@ export const BackgroundInfo = ({playerBG, setPlayerBG, selectedBGInfo, successTo
       })
     }, [playerBG])
     
+    const [ready, setReady] = useState(false);
     useEffect(() => {
         //! mutating values for consistency
 
@@ -36,7 +37,7 @@ export const BackgroundInfo = ({playerBG, setPlayerBG, selectedBGInfo, successTo
             delete selectedBGInfo.ideals.from;
             selectedBGInfo.ideals.from = flattenedArray;
         }
-
+        setReady(true);
     },[])
 
 
@@ -101,7 +102,11 @@ export const BackgroundInfo = ({playerBG, setPlayerBG, selectedBGInfo, successTo
                     </Tabs>
                 </Box>
                 <TabPanel value={tabValue} index={0}>
-                    <BGDescription selectedBGInfo={selectedBGInfo} />
+                  {ready
+                  ?
+                  <BGDescription selectedBGInfo={selectedBGInfo} />
+                  :
+                  null}
                 </TabPanel>
                 <TabPanel value={tabValue} index={1}>
                     <BGOptions selectedBGInfo={selectedBGInfo} choices={choices} setChoices={setChoices} />

@@ -64,14 +64,17 @@ const Mychars = () => {
     }
     
     return (
-        <div>
+        <div className="page_wrapper">
             <h1>Mychars.jsx</h1>
             <Box sx={{width:"100%", display:"flex", flexDirection:"row", flexWrap:"wrap"}}>
             {userData?.characters?.length > 0
             ?
             renderCharacters()
             :
-            <h1>You dont have any characters! Create one?</h1>
+            <>
+            <Typography variant="h4">You dont have any characters!</Typography>
+            <Typography sx={{ml:"0.5em"}}variant="h4" className="link"><Link href="/create">Create one?</Link></Typography>
+            </>
             }
             </Box>
         </div>
