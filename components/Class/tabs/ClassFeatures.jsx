@@ -7,7 +7,35 @@ import { CreateDefaultBtns } from '../../utility/CreateDefaultBtns'
 
 export const ClassFeatures = ({selectedClassInfo, choices, setChoices}) => {
 
-    
+    const spellCaster = selectedClassInfo?.spellcasting;
+
+    const spellcastingData = () => {
+        const spellcastRender = spellCaster.info.map((infoBlock) => {
+            const description = infoBlock.desc.map((arrayStep) => {
+                return (
+                    <Box key={uuidv4()}>
+                    <Typography key={uuidv4()} variant="h7">{arrayStep}</Typography>
+                    </Box>
+                )
+            })
+            return (
+                <React.Fragment key={uuidv4()}>
+                <Typography variant="h6" mt="1em">{infoBlock?.name}</Typography>
+                {description}
+                </React.Fragment>
+                );
+        })
+        return (
+            <>
+            <Typography variant="h6" mt="1em">Spellcasting:</Typography>
+            <Divider />
+            {spellcastRender}
+            </>
+        )
+    }
+
+    const renderFeatures = () => {
+
     const featureData = selectedClassInfo?.features?.map((arrayStep) => {
         const featureSpecificSelector = arrayStep?.feature_specific?.subfeature_options;
         const description = arrayStep.desc.map((arrayStep) => {
@@ -30,6 +58,9 @@ export const ClassFeatures = ({selectedClassInfo, choices, setChoices}) => {
         )
     })
 
+    return featureData;
+    }   
+
     return (
         <>
         <Box className="colStyle">
@@ -46,7 +77,8 @@ export const ClassFeatures = ({selectedClassInfo, choices, setChoices}) => {
             <Divider/>
             <Typography variant="h7">You are proficient in the following saving throws:</Typography>
             <CreateDefaultBtns inputArray={selectedClassInfo.saving_throws} />
-            {featureData}
+            {spellCaster ? spellcastingData() : null}
+            {renderFeatures()}
         </Box>
         </>
     )
