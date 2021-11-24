@@ -14,17 +14,16 @@ const Mychars = () => {
 
 
     const renderCharacters = () => {
-        return userData.characters.map((characterData) => {
+        return userData.characters.map((characterData, index) => {
 
             const charName = characterData?.name;
             const charRace = characterData?.fromRace?.selectedRaceInfo?.name ?? "<Race>";
             const charClass = characterData?.fromClass?.selectedClassInfo?.class?.name ?? "<Class>";
             const portraitURL = characterData?.image_url;
-            const uid = characterData.uid;
 
             return (
                 <Card key={uuidv4()} sx={{ width:"25em", m:"1em", ml:"5em" }}>
-                    <Link href={`/mychars/${uid}`}>
+                    <Link href={`/mychars/${index}`}>
                     <CardActionArea sx={{ display: 'flex', justifyContent:"left" }}>
                     <CardMedia >
                         <Box sx={{width:"150px", height:"150px", position:"relative", backgroundColor:"#07212e"}}>
