@@ -12,7 +12,7 @@ export const ClassOptions = ({ selectedClassInfo , choices , setChoices }) => {
         <CreateDefaultBtns inputArray={selectedClassInfo?.proficiencies}/>
         <Typography variant="h6" mt="1em">Proficiency Choices:</Typography>
         <Divider/>
-        <Box className="rowStyle" sx={{justifyContent:"flex-start"}}>
+        <Box className="colStyle" sx={{justifyContent:"flex-start"}}>
         {selectedClassInfo?.proficiency_choices?.map((arrayStep, index) => {
             return (
             <CreateChoiceSelection key={`${index}+ygbgh`} choiceObject={arrayStep} choices={choices} setChoices={setChoices}/>

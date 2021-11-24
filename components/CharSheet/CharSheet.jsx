@@ -1,4 +1,4 @@
-import { Button } from '@mui/material'
+import { Button, Tab, Tabs } from '@mui/material'
 import React from 'react'
 import { useAuth } from "../../components/AuthContext";
 import { ToastContainer, toast } from "react-toastify";
@@ -7,18 +7,73 @@ import { saveCharacter, findMyCharacters, updateCharacter } from '../../firebase
 import { useAtom } from 'jotai'
 import { tempCharacterAtom } from '../../pages/create'
 import { SummaryCard } from './components/SummaryCard';
+import { Box } from '@mui/system';
+import { useState } from 'react';
+import { FromStats } from './tabs/FromStats';
+import { FromClass } from './tabs/FromClass';
+import { FromRace } from './tabs/FromRace';
+import { FromBG } from './tabs/FromBG';
 
 
 
 export const CharSheet = () => {
-    
-    const { currentUser, userData, setUserData } = useAuth();
-    const [tempCharacter, setTempCharacter] = useAtom(tempCharacterAtom);
 
-    const charName = tempCharacter?.name;
-    const charRace = tempCharacter?.fromRace?.selectedRaceInfo?.name ?? "<Race>";
-    const charClass = tempCharacter?.fromClass?.selectedClassInfo?.class?.name ?? "<Class>";
-    const portraitURL = tempCharacter?.image_url;
+    const [tabValue, setTabValue] = useState(0);
+    const handleChange = (event, newValue) => {
+        setTabValue(newValue);
+    };
+    function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+    
+    return (
+        <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}>
+        {value === index && (
+            <Box sx={{ p: 3 }}>
+            {children}
+            </Box>
+        )}
+        </div>
+    );
+    }
+    function allyProps(index) {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
+    }
+    
+    const [tempCharacter, setTempCharacter] = useAtom(tempCharacterAtom);
+    const [conMod, setConMod] = useState(0);
+
+    const allProficiencies = [];
+    const profObject = {
+        classDefProfs: tempCharacter?.fromClass?.selectedClassInfo.proficiencies,
+        classChooseProfs: tempCharacter?.fromClass?.proficiencies,
+        raceDefProfs: tempCharacter?.fromRace?.selectedRaceInfo.starting_proficiencies,
+        raceChooseProfs: tempCharacter?.fromRace?.proficiencies,
+        bgDefProfs: tempCharacter?.fromBackground.selectedBGInfo?.starting_proficiencies,
+        bgChooseProfs: tempCharacter?.fromBackground?.proficiencies
+    }
+
+    for (const thisProf in profObject) {
+        // console.log(profObject[thisProf]);
+        if (profObject[thisProf]?.length > 0 || profObject[thisProf] !== undefined ) {
+            allProficiencies.push(...profObject[thisProf])
+        }
+    }
+
+    console.log(allProficiencies)
+
+
+    //* temp stuff
+    //? temp stuff
+    //! temp stuff 
+    const { currentUser, userData, setUserData } = useAuth();
 
     const handleSave = async () => {
         await saveCharacter(tempCharacter, currentUser);
@@ -46,14 +101,42 @@ export const CharSheet = () => {
             }
         )
     }
+    //* temp stuff
+    //? temp stuff
+    //! temp stuff 
     return (
         <>
             <h1>CharSheet.jsx</h1>
             <Button color="secondary" variant="outlined" onClick={handleSave}>Save Character</Button>
             <Button variant="contained" onClick={handleUpdate}>test update</Button>
             <Button variant="contained" onClick={()=>{console.log(tempCharacter)}}>log char</Button>
-            
+            <Button variant="contained" onClick={()=>{console.log(conMod)}}>log conMod</Button>
+
+
             <SummaryCard characterData={tempCharacter} setTempCharacter={setTempCharacter} />
+
+            <Box sx={{ width: '100%' }}>
+                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                    <Tabs value={tabValue} onChange={handleChange} aria-label="basic tabs">
+                    <Tab label="Stats & Summary" {...allyProps(0)} />
+                    <Tab label="Class" {...allyProps(1)} />
+                    <Tab label="Race" {...allyProps(2)} />
+                    <Tab label="Background" {...allyProps(3)} />
+                    </Tabs>
+                </Box> 
+                <TabPanel value={tabValue} index={0}>
+                    <FromStats tempCharacter={tempCharacter} conMod={conMod} setConMod={setConMod}/>
+                </TabPanel>
+                <TabPanel value={tabValue} index={1}>
+                    <FromClass tempCharacter={tempCharacter}/>
+                </TabPanel>
+                <TabPanel value={tabValue} index={2}>
+                    <FromRace tempCharacter={tempCharacter}/>
+                </TabPanel>
+                <TabPanel value={tabValue} index={3}>
+                    <FromBG tempCharacter={tempCharacter}/>
+                </TabPanel>
+            </Box>
         </>
     )
 }
