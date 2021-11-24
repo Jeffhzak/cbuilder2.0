@@ -52,9 +52,9 @@ export const CharSheet = () => {
 
     const allProficiencies = [];
     const profObject = {
-        classDefProfs: tempCharacter?.fromClass?.selectedClassInfo.proficiencies,
+        classDefProfs: tempCharacter?.fromClass?.selectedClassInfo?.proficiencies,
         classChooseProfs: tempCharacter?.fromClass?.proficiencies,
-        raceDefProfs: tempCharacter?.fromRace?.selectedRaceInfo.starting_proficiencies,
+        raceDefProfs: tempCharacter?.fromRace?.selectedRaceInfo?.starting_proficiencies,
         raceChooseProfs: tempCharacter?.fromRace?.proficiencies,
         bgDefProfs: tempCharacter?.fromBackground.selectedBGInfo?.starting_proficiencies,
         bgChooseProfs: tempCharacter?.fromBackground?.proficiencies

@@ -11,9 +11,9 @@ export default function SelectToggleButton({data, selectedCount, setSelectedCoun
     const handleClick = () => {
         // console.log(selectedCount);    
         // console.log(inChoices);    
-        if(selectedCount < limitCap) {
+        // if(selectedCount < limitCap) {
             if(selected === false) {
-                setSelectedCount(x=> x+1);
+                // setSelectedCount(x=> x+1);
                 setSelected(x=> x=!x); //* flip state of selected
                 //* check if object has this key, if no create it, if yes add to it.
                 const isKeyInObject = !!choices?.[type] ? [...choices[type], data] : [data]
@@ -22,10 +22,10 @@ export default function SelectToggleButton({data, selectedCount, setSelectedCoun
                 setChoices(newChoices);
                 // console.log(choices);
             }
-        }
-        if(selectedCount <= limitCap) {
+        // }
+        // if(selectedCount <= limitCap) {
             if(selected === true) {
-                setSelectedCount(x => x-1);
+                // setSelectedCount(x => x-1);
                 setSelected(x=> x=!x); //* flip state of selected
                 //* filter out everything except item to remove
                 const filteredArray = choices[type].filter((arrayStep) => {
@@ -35,7 +35,7 @@ export default function SelectToggleButton({data, selectedCount, setSelectedCoun
                 const newChoices = {...choices, [type]:filteredArray};
                 setChoices(newChoices);
             }
-        }
+        // }
     }
 
     return (
