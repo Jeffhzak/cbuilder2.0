@@ -1,6 +1,7 @@
-import { Box as div } from "@mui/system";
+import { Box } from "@mui/system";
 import { useRouter } from "next/dist/client/router";
 import { useAuth } from '../../components/AuthContext';
+import { CharSheet } from "../../components/CharSheet/CharSheet";
 
 const ThisChar = () => {
 
@@ -10,10 +11,11 @@ const ThisChar = () => {
     const thisChar = userData.characters[index];
 
     return(
-        <div className="page_wrapper">
+        <Box className="page_wrapper">
         <h1>UID: {thisChar.uid}</h1>
         <h1>{thisChar.name}</h1>
-        </div>
+        <CharSheet loadedChar={thisChar} />
+        </Box>
     )
 }
 

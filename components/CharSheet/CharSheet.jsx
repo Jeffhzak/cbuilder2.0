@@ -1,4 +1,4 @@
-import { Button, Tab, Tabs } from '@mui/material'
+import { Button, LinearProgress, Tab, Tabs } from '@mui/material'
 import React from 'react'
 import { useAuth } from "../../components/AuthContext";
 import { ToastContainer, toast } from "react-toastify";
@@ -21,9 +21,11 @@ const regexCheck = (prof) => {
     return regex.test(`${prof.index}`);
 }
 
-export const CharSheet = () => {
+export const CharSheet = ({loadedChar}) => {
 
     const [tabValue, setTabValue] = useState(0);
+    const [ready, setReady] = useState(false);
+
     const handleChange = (event, newValue) => {
         setTabValue(newValue);
     };
@@ -53,11 +55,13 @@ export const CharSheet = () => {
     }
     
     const [tempCharacter, setTempCharacter] = useAtom(tempCharacterAtom);
-    const [conMod, setConMod] = useState(0);
 
+    
+    const [conMod, setConMod] = useState(0);
+    
     const [skillProfs, setSkillProfs] = useState([]);
     const [equipProfs, setEquipProfs] = useState([]);
-
+    
     const savingProfs = tempCharacter?.fromClass?.selectedClassInfo?.saving_throws;
     const fightingStyle = tempCharacter?.fromClass?.feature;
     const dragonAncestry = tempCharacter?.fromRace?.trait;
@@ -65,8 +69,9 @@ export const CharSheet = () => {
     
     useEffect(() => {
         
+        loadedChar ? setTempCharacter(loadedChar) : null; //!
         // console.log("charsheet useEffect triggered");
-
+        setReady(false);
         const profObject = {
             classDefProfs: tempCharacter?.fromClass?.selectedClassInfo?.proficiencies,
             classChooseProfs: tempCharacter?.fromClass?.proficiencies,
@@ -96,6 +101,7 @@ export const CharSheet = () => {
 
         setSkillProfs(tempSkill);
         setEquipProfs(tempEquip);
+        setReady(true);
         
     },[tempCharacter])
     
@@ -103,11 +109,10 @@ export const CharSheet = () => {
     // console.log("skillProfs",skillProfs)
     // console.log("equipProfs",equipProfs)
 
+    //* firebase stuff
+    //? firebase stuff
+    //! firebase stuff 
 
-
-    //* temp stuff
-    //? temp stuff
-    //! temp stuff 
     const { currentUser, userData, setUserData } = useAuth();
 
     const handleSave = async () => {
@@ -128,22 +133,23 @@ export const CharSheet = () => {
             );
     }
     const handleUpdate = () => {
-        console.log("handleUpdate triggered")
-        updateCharacter(
-            {
-                uid: "000461c7-9f6c-4d9e-96fe-3ed9c9e991ac",
-                test: "hi",
-            }
-        )
+        // console.log("handleUpdate triggered")
+        updateCharacter(tempCharacter)
     }
-    //* temp stuff
-    //? temp stuff
-    //! temp stuff 
+
     return (
-        <>
+        <>  
+            {ready
+            ?
+            <>
             <h1>CharSheet.jsx</h1>
+            {loadedChar
+            ?
+            <Button color="secondary" variant="outlined" onClick={handleUpdate}>Confirm Edit</Button>
+            :
             <Button color="secondary" variant="outlined" onClick={handleSave}>Save Character</Button>
-            <Button variant="contained" onClick={handleUpdate}>test update</Button>
+            }
+            {/* <Button variant="contained" onClick={handleUpdate}>test update</Button> */}
             <Button variant="contained" onClick={()=>{console.log(tempCharacter)}}>log char</Button>
             <Button variant="contained" onClick={()=>{console.log(conMod)}}>log conMod</Button>
 
@@ -173,6 +179,10 @@ export const CharSheet = () => {
                     <FromBG tempCharacter={tempCharacter}/>
                 </TabPanel>
             </Box>
+            </>
+            :
+            <LinearProgress />
+            }
         </>
     )
 }
