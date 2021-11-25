@@ -28,8 +28,8 @@ export const Race = ({allRaceInfo, successToast, setTab}) => {
     }
     return (
         <>
-            <h1>Race.jsx</h1>
-            <h1>{playerRace}</h1>
+            {/* <h1>Race.jsx</h1>
+            <h1>{playerRace}</h1> */}
 
             {playerRace.length === 0
             ?

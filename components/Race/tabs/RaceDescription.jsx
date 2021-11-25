@@ -5,7 +5,7 @@ import React from 'react'
 export const RaceDescription = ({selectedRaceInfo}) => {
     return (
         <>
-        <h1>RaceDescription.jsx</h1>
+        {/* <h1>RaceDescription.jsx</h1> */}
         <Box className="colStyle">
             <Typography variant="h6" mt="1em">Size: {selectedRaceInfo?.size}</Typography>
             <Divider/>

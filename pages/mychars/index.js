@@ -65,7 +65,7 @@ const Mychars = () => {
     
     return (
         <div className="page_wrapper">
-            <h1>Mychars.jsx</h1>
+            {/* <h1>Mychars.jsx</h1> */}
             <Box sx={{width:"100%", display:"flex", flexDirection:"row", flexWrap:"wrap"}}>
             {userData?.characters?.length > 0
             ?

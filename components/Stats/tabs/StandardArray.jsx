@@ -39,9 +39,9 @@ export const StandardArray = ({stats, setStats, statDescriptions, standardArray,
     return (
         <>
             <Button variant="contained" onClick={()=>{setPBorSA("")}}>Go Back</Button>
-            <Button onClick={()=>console.log(stats)}>log stats</Button>
+            {/* <Button onClick={()=>console.log(stats)}>log stats</Button>
             <Button onClick={()=>console.log(standardArray)}>log SA</Button>
-            <h3>StandardArray.jsx</h3>
+            <h3>StandardArray.jsx</h3> */}
             {renderGrid()}
             <Button variant="contained" onClick={handleSubmit}>Submit</Button>
             <StatSubmit open={open} setOpen={setOpen} stats={stats} successToast={successToast} setTab={setTab}/>

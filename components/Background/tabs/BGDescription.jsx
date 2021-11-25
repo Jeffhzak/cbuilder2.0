@@ -23,7 +23,7 @@ export const BGDescription = ({selectedBGInfo}) => {
     })
     return (
         <>
-            <h1>BGDescription.jsx</h1>
+            {/* <h1>BGDescription.jsx</h1> */}
             <Box className="colStyle">
                 <Typography variant="h6" mt="1em">Description:</Typography>
                 <Divider/>

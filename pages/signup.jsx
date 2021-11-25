@@ -1,4 +1,4 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, Card, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import { useAuth } from "../components/AuthContext";
@@ -79,11 +79,11 @@ const Signup = () => {
     const normalPage = () => {
         return (
             <>
-            <h1>signup.jsx</h1>
+            {/* <h1>signup.jsx</h1>
             <button onClick={()=>{console.log(currentUser)}}>User Context</button>
-            <h1>{currentUser?.email}</h1>
+            <h1>{currentUser?.email}</h1> */}
 
-            <Box component="form" sx={{m: 1, width: '25em', display:"flex", flexDirection:"column", alignItems:"center"}}>
+            <Card component="form" sx={{m: 1, width: '25em', display:"flex", flexDirection:"column", alignItems:"center", p:"1em", margin:"auto"}}>
 
                 <TextField
                 required
@@ -130,7 +130,7 @@ const Signup = () => {
                     <Typography variant="subtitle2" display="inline">Already have an account? </Typography>
                     <Typography variant="subtitle2" className="link" display="inline"><Link href="/login">Log in here!</Link></Typography>
                 </Box>
-            </Box>
+            </Card>
             </>
         )
     }

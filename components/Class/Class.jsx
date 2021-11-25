@@ -29,8 +29,8 @@ export const Class = ({allClassInfo, successToast, setTab}) => {
     return (
 
         <>
-            <h1>Class.jsx</h1>
-            <button onClick={()=>{console.log(playerClass)}}>log class</button>
+            {/* <h1>Class.jsx</h1>
+            <button onClick={()=>{console.log(playerClass)}}>log class</button> */}
             {playerClass?.length === 0 
             ?
             <>

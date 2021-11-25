@@ -31,12 +31,12 @@ export const tempCharacterAtom = atom({
 });
 
 const Create = ({allClassInfo, allRaceInfo, allBackgroundInfo, allStatsInfo}) => {
-  const tempFunc = () => {
-    console.log("allClassInfo",allClassInfo);
-    console.log("allRaceInfo",allRaceInfo);
-    console.log("allBackgroundInfo",allBackgroundInfo);
-    console.log("allStatsInfo",allStatsInfo);
-  }
+  // const tempFunc = () => {
+  //   console.log("allClassInfo",allClassInfo);
+  //   console.log("allRaceInfo",allRaceInfo);
+  //   console.log("allBackgroundInfo",allBackgroundInfo);
+  //   console.log("allStatsInfo",allStatsInfo);
+  // }
 
   const { userData } = useAuth();
   const bgRef = useRef(allBackgroundInfo);
@@ -120,8 +120,8 @@ const Create = ({allClassInfo, allRaceInfo, allBackgroundInfo, allStatsInfo}) =>
           <Box  sx={{width:sidebarWidthCollapsed}}>
           </Box>
           <Box sx={{width:"95%", maxWidth:"95%", ml: "2em", mr:"2em"}}>
-          <h1>Create.jsx</h1>
-          <button onClick={tempFunc}>log props</button>
+          {/* <h1>Create.jsx</h1> */}
+          {/* <button onClick={tempFunc}>log props</button> */}
           {renderPage()}
           </Box>
         </Box>

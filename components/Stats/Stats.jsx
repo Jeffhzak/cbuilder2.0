@@ -36,13 +36,13 @@ export const Stats = ({allStatsInfo, successToast, setTab}) => {
 
     return (
         <>
-            <h1>Stats.jsx</h1>
-            <button onClick={()=>{console.log(allStatsInfo)}}>log statsinfo</button>
+            {/* <h1>Stats.jsx</h1>
+            <button onClick={()=>{console.log(allStatsInfo)}}>log statsinfo</button> */}
             <Box sx={{mt:"2em", mb:"1em", ml:"20vw", mr:"20vw"}}>
             {PBorSA === ""
             ?
             <>
-            <Typography>Pick a method to determine your stats:</Typography>
+            <Typography variant="h4">Pick a method to determine your stats:</Typography>
             <Box className="rowStyle">
                 <Card sx={{ maxWidth: "15em", margin:"1em", flexShrink:0 }}>
                     <CardActionArea onClick={() => setPBorSA("SA")}>
@@ -55,7 +55,7 @@ export const Stats = ({allStatsInfo, successToast, setTab}) => {
                         </CardMedia>
                         <CardContent>
                             <Typography gutterBottom variant="subtitle1">Standard Array</Typography>
-                            <Typography variant="subtitle1" color="text.secondary">placeholder</Typography>
+                            <Typography variant="subtitle1" color="text.secondary">Determine your stats from a set of standard numbers.</Typography>
                         </CardContent>
                     </CardActionArea>
                 </Card>
@@ -70,7 +70,7 @@ export const Stats = ({allStatsInfo, successToast, setTab}) => {
                         </CardMedia>
                         <CardContent>
                             <Typography gutterBottom variant="subtitle1">Point Buy</Typography>
-                            <Typography variant="subtitle1" color="text.secondary">placeholder</Typography>
+                            <Typography variant="subtitle1" color="text.secondary">Determine your stats by allocating them with the budget provided.</Typography>
                         </CardContent>
                     </CardActionArea>
                 </Card>

@@ -27,8 +27,8 @@ export const ClassSubmitBox = ({open, setOpen, choices, successToast, setTab}) =
 
     return (
         <>
-            <h1>ClassSubmitBox.jsx</h1>
-            <button onClick={()=>{console.log(tempCharacter)}}>log characterAtom</button>
+            {/* <h1>ClassSubmitBox.jsx</h1>
+            <button onClick={()=>{console.log(tempCharacter)}}>log characterAtom</button> */}
             <Modal
             open={open}
             onClose={handleSubmitClose}

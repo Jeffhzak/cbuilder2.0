@@ -60,10 +60,10 @@ export const ClassInfo = ({ playerClass, setPlayerClass, selectedClassInfo, succ
 
     return (
         <>
-            <h1>ClassInfo.jsx</h1>
+            {/* <h1>ClassInfo.jsx</h1> */}
             <Button variant="contained" onClick={()=>{setPlayerClass("")}}>Go Back</Button>
-            <Button variant="contained" onClick={()=>{console.log(selectedClassInfo)}}>Log ClassInfo</Button>
-            <Button variant="contained" onClick={()=>{console.log(choices)}}>Log Choices</Button>
+            {/* <Button variant="contained" onClick={()=>{console.log(selectedClassInfo)}}>Log ClassInfo</Button> */}
+            {/* <Button variant="contained" onClick={()=>{console.log(choices)}}>Log Choices</Button> */}
             <Box sx={{width: "100%"}}>
                 <Typography variant="h5">You selected:</Typography>
                 <Typography variant="h5">The {selectedClassInfo?.class.name}</Typography>

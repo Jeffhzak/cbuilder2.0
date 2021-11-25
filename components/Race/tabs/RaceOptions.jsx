@@ -31,7 +31,7 @@ export const RaceOptions = ({selectedRaceInfo, choices, setChoices}) => {
 
     return (
         <>
-            <h1>RaceOptions.jsx</h1>
+            {/* <h1>RaceOptions.jsx</h1> */}
             <Box className="colStyle">
             <Typography variant="h6" mt="1em">Proficiencies gained: </Typography>
             <Divider/>
