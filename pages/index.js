@@ -17,6 +17,14 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
+        <div style={{position:"relative", width:"50vw", height:"30vh"}}>
+        <Image 
+          src="/dndcbuilderlogo.png" 
+          layout="fill"
+          objectFit="contain"
+          alt="dndcbuilderlogo"
+        />
+        </div>
         <Typography variant="button" className={styles.title}>
           {!!userData?.userName ? `Welcome back, ${userData?.userName}!` : "Welcome!"}
         </Typography>
@@ -24,6 +32,7 @@ export default function Home() {
 
       <footer className={styles.footer}>
           Powered by hopes and dreams.
+          Please dont sue me Wizards of the Coast.
       </footer>
     </div>
   )
