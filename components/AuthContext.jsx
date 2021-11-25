@@ -1,5 +1,5 @@
 import { useContext, createContext, useState, useEffect } from 'react'
-import { auth, findMyCharacters, getUserData } from '../firebase/firebase';
+import { auth, findMyCharacters, findMyCustomBGs, getUserData } from '../firebase/firebase';
 import {
     collection,
     doc,
@@ -65,10 +65,13 @@ export const AuthProvider = ({children}) => {
                 const fetchedUserData = await getUserData(user);
 
                 const characterArray = await findMyCharacters(user);
+
+                const bgArray = await findMyCustomBGs(user);
                 
                 setUserData({
                     userName: fetchedUserData.user_name,
                     characters: characterArray,
+                    custom_backgrounds: bgArray,
                 });
             }
 
