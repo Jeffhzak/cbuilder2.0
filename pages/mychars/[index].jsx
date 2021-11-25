@@ -10,11 +10,22 @@ const ThisChar = () => {
     const {index} = router.query;
     const thisChar = userData.characters[index];
 
+    const removeCharFromUser = (uid) => {
+        console.log("removeChar fired")
+        const newCharArray = userData.characters.filter((character) => {
+            if (character.uid !== uid) return true;
+            else return false;
+        })
+        setUserData({
+            ...userData,
+            characters: newCharArray,
+        })
+    }
+
     return(
         <Box className="page_wrapper">
         <h1>UID: {thisChar.uid}</h1>
-        <h1>{thisChar.name}</h1>
-        <CharSheet loadedChar={thisChar} />
+        <CharSheet loadedChar={thisChar} removeCharFromUser={removeCharFromUser} />
         </Box>
     )
 }

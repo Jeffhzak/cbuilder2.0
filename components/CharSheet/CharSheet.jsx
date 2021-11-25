@@ -1,9 +1,9 @@
-import { Button, LinearProgress, Tab, Tabs } from '@mui/material'
+import { Button, Tab, Tabs } from '@mui/material'
 import React from 'react'
 import { useAuth } from "../../components/AuthContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"
-import { saveCharacter, findMyCharacters, updateCharacter } from '../../firebase/firebase';
+import { saveCharacter, findMyCharacters, updateCharacter, deleteCharacter } from '../../firebase/firebase';
 import { useAtom } from 'jotai'
 import { tempCharacterAtom } from '../../pages/create'
 import { SummaryCard } from './components/SummaryCard';
@@ -15,6 +15,7 @@ import { FromRace } from './tabs/FromRace';
 import { FromBG } from './tabs/FromBG';
 import { ProfDisplay } from './tabs/ProfDisplay';
 import { SheetSubmitBox } from './components/SheetSubmitBox';
+import { useRouter } from "next/dist/client/router";
 
 const regexCheck = (prof) => {
     const regex = /skill-[a-zA-Z]+/i;
@@ -22,7 +23,9 @@ const regexCheck = (prof) => {
     return regex.test(`${prof.index}`);
 }
 
-export const CharSheet = ({loadedChar}) => {
+export const CharSheet = ({loadedChar, removeCharFromUser}) => {
+    
+    const router = useRouter();
 
     const [tabValue, setTabValue] = useState(0);
     const [ready, setReady] = useState(false);
@@ -69,43 +72,11 @@ export const CharSheet = ({loadedChar}) => {
     const savingProfs = tempCharacter?.fromClass?.selectedClassInfo?.saving_throws;
     const fightingStyle = tempCharacter?.fromClass?.feature;
     const dragonAncestry = tempCharacter?.fromRace?.trait;
-    
+
     useEffect(() => {
-        
-        loadedChar ? setTempCharacter(loadedChar) : null; //!
         console.log("charsheet useEffect triggered");
-        setReady(false);
-        const profObject = {
-            classDefProfs: tempCharacter?.fromClass?.selectedClassInfo?.proficiencies,
-            classChooseProfs: tempCharacter?.fromClass?.proficiencies,
-            raceDefProfs: tempCharacter?.fromRace?.selectedRaceInfo?.starting_proficiencies,
-            raceChooseProfs: tempCharacter?.fromRace?.proficiencies,
-            bgDefProfs: tempCharacter?.fromBackground.selectedBGInfo?.starting_proficiencies,
-            bgChooseProfs: tempCharacter?.fromBackground?.proficiencies
-        }
-        const tempArray = [];
-        const tempSkill = [];
-        const tempEquip = [];
-        for (const thisProf in profObject) {
-            // console.log(profObject[thisProf]);
-            if (profObject[thisProf]?.length > 0 || profObject[thisProf] !== undefined ) {
-                tempArray.push(...profObject[thisProf])
-            }
-        }
-        //! working fine up to here
-        // console.log("useeff temparray", tempArray)
-        tempArray.map((prof) => {
-            if (regexCheck(prof)) {
-                tempSkill.push(prof);
-            } else {
-                tempEquip.push(prof);
-            }
-        })
-
-        setSkillProfs(tempSkill);
-        setEquipProfs(tempEquip);
+        !!loadedChar ? setTempCharacter(loadedChar) : null; //!
         setReady(true);
-
         return () => {
             loadedChar 
             ? 
@@ -118,8 +89,43 @@ export const CharSheet = ({loadedChar}) => {
             })
             : null;
         }
-        
     },[])
+    
+    //! create proficiency arrays on load
+    useEffect(() => {
+        if (ready) {
+            console.log("ready useEffect triggered");
+            const profObject = {
+                classDefProfs: tempCharacter?.fromClass?.selectedClassInfo?.proficiencies,
+                classChooseProfs: tempCharacter?.fromClass?.proficiencies,
+                raceDefProfs: tempCharacter?.fromRace?.selectedRaceInfo?.starting_proficiencies,
+                raceChooseProfs: tempCharacter?.fromRace?.proficiencies,
+                bgDefProfs: tempCharacter?.fromBackground.selectedBGInfo?.starting_proficiencies,
+                bgChooseProfs: tempCharacter?.fromBackground?.proficiencies
+            }
+            const tempArray = [];
+            const tempSkill = [];
+            const tempEquip = [];
+            for (const thisProf in profObject) {
+                // console.log(profObject[thisProf]);
+                if (profObject[thisProf]?.length > 0 || profObject[thisProf] !== undefined ) {
+                    tempArray.push(...profObject[thisProf])
+                }
+            }
+            
+            // console.log("useeff temparray", tempArray)
+            tempArray.map((prof) => {
+                if (regexCheck(prof)) {
+                    tempSkill.push(prof);
+                } else {
+                    tempEquip.push(prof);
+                }
+            })
+
+            setSkillProfs(tempSkill);
+            setEquipProfs(tempEquip);
+        }
+    },[ready])
 
     
     // console.log(allProficiencies)
@@ -166,6 +172,9 @@ export const CharSheet = ({loadedChar}) => {
             );
         
         setSubmitOpen(false);
+        setTimeout (() => {
+            router.push("/mychars");
+        }, 500);
     }
 
     const handleUpdate = async () => {
@@ -182,17 +191,32 @@ export const CharSheet = ({loadedChar}) => {
         setSubmitOpen(false);
     }
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
         console.log("handleDelete fired");
+        const uid = loadedChar.uid;
+        await toast.promise(
+            deleteCharacter(uid),
+            {
+                pending: "Deleting your character...",
+                success: "Character Deleted. :(",
+            }, {
+                position: "top-center",
+                autoClose: 500,
+            }) 
+
         setSubmitOpen(false);
+        removeCharFromUser(uid);
+        setTimeout (() => {
+            router.push("/mychars");
+        }, 500);
+
     }
 
 
     return (
-        <>  <Box sx={{ml: loadedChar ? "5vw" : null, mr: "5vw"}}>
-            {ready
-            ?
-            <>
+        <>
+        <Box sx={{ml: loadedChar ? "5vw" : "0", mr: "5vw"}}>
+            
             <h1>CharSheet.jsx</h1>
             <Box sx={{width:"43em", display:"flex", flexDirection:"row-reverse", gap:"1em", mb:"2em"}}>
             {loadedChar
@@ -235,13 +259,9 @@ export const CharSheet = ({loadedChar}) => {
                     <FromBG tempCharacter={tempCharacter}/>
                 </TabPanel>
             </Box>
-            </>
-            :
-            <LinearProgress />
-            }
 
             <SheetSubmitBox open={submitOpen} setOpen={setSubmitOpen} text={submitText} func={submitFunc} />
-            </Box>
+        </Box>
 
         <ToastContainer theme="dark"/>
         </>
