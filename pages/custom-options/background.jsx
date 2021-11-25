@@ -479,3 +479,9 @@ const CustomBackground = () => {
 }
 
 export default CustomBackground;
+
+
+export async function getStaticProps() {
+
+
+}
