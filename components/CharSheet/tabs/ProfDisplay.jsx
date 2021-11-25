@@ -2,7 +2,7 @@ import { Divider, Typography } from '@mui/material'
 import React from 'react'
 import { CreateDefaultBtns } from '../../utility/CreateDefaultBtns'
 
-export const ProfDisplay = ({skillProfs, equipProfs, savingProfs, fightingStyle, dragonAncestry, extraRaceStats}) => {
+export const ProfDisplay = ({skillProfs, equipProfs, savingProfs, fightingStyle, dragonAncestry}) => {
 
     const renderProfs = (array, text) => {
         return (
@@ -16,7 +16,6 @@ export const ProfDisplay = ({skillProfs, equipProfs, savingProfs, fightingStyle,
     return (
         <>  
             {savingProfs ? renderProfs(savingProfs, "Saving Throw Proficiencies:") : null}
-            {extraRaceStats ? renderProfs(extraRaceStats, "Selected Stats from Race:") : null}
             {fightingStyle ? renderProfs(fightingStyle, "Selected Fighting Style:") : null}
             {dragonAncestry ? renderProfs(dragonAncestry, "Selected Draconic Ancestry: "): null}
             {skillProfs ? renderProfs(skillProfs, "Skill Proficiencies:") : null}

@@ -69,12 +69,11 @@ export const CharSheet = ({loadedChar}) => {
     const savingProfs = tempCharacter?.fromClass?.selectedClassInfo?.saving_throws;
     const fightingStyle = tempCharacter?.fromClass?.feature;
     const dragonAncestry = tempCharacter?.fromRace?.trait;
-    const extraRaceStats = tempCharacter?.fromRace?.ability_bonus;
     
     useEffect(() => {
         
         loadedChar ? setTempCharacter(loadedChar) : null; //!
-        // console.log("charsheet useEffect triggered");
+        console.log("charsheet useEffect triggered");
         setReady(false);
         const profObject = {
             classDefProfs: tempCharacter?.fromClass?.selectedClassInfo?.proficiencies,
@@ -142,7 +141,15 @@ export const CharSheet = ({loadedChar}) => {
 
     const handleSave = async () => {
         console.log("handleSave fired");
-        await saveCharacter(tempCharacter, currentUser);
+        await toast.promise(
+            saveCharacter(tempCharacter, currentUser),
+            {
+                pending: "Saving your character...",
+                success: "Character saved!",
+            }, {
+                position: "top-center",
+                autoClose: 500,
+            }) 
         setTempCharacter({
             fromClass: {},
             fromRace: {},
@@ -161,9 +168,17 @@ export const CharSheet = ({loadedChar}) => {
         setSubmitOpen(false);
     }
 
-    const handleUpdate = () => {
+    const handleUpdate = async () => {
         console.log("handleUpdate fired");
-        updateCharacter(tempCharacter)
+        await toast.promise(
+            updateCharacter(tempCharacter),
+            {
+                pending: "Updating your character...",
+                success: "Character Updated!",
+            }, {
+                position: "top-center",
+                autoClose: 500,
+            }) 
         setSubmitOpen(false);
     }
 
@@ -208,7 +223,7 @@ export const CharSheet = ({loadedChar}) => {
                 </Box> 
                 <TabPanel value={tabValue} index={0}>
                     <FromStats tempCharacter={tempCharacter} conMod={conMod} setConMod={setConMod}/>
-                    <ProfDisplay skillProfs={skillProfs} equipProfs={equipProfs} savingProfs={savingProfs} fightingStyle={fightingStyle} dragonAncestry={dragonAncestry} extraRaceStats={extraRaceStats}/>
+                    <ProfDisplay skillProfs={skillProfs} equipProfs={equipProfs} savingProfs={savingProfs} fightingStyle={fightingStyle} dragonAncestry={dragonAncestry}/>
                 </TabPanel>
                 <TabPanel value={tabValue} index={1}>
                     <FromClass tempCharacter={tempCharacter}/>
