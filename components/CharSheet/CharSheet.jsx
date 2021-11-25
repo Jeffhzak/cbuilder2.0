@@ -23,7 +23,7 @@ const regexCheck = (prof) => {
     return regex.test(`${prof.index}`);
 }
 
-export const CharSheet = ({loadedChar, removeCharFromUser}) => {
+export const CharSheet = ({loadedChar, removeCharFromUser, updateCharData}) => {
     
     const router = useRouter();
 
@@ -189,6 +189,7 @@ export const CharSheet = ({loadedChar, removeCharFromUser}) => {
                 autoClose: 500,
             }) 
         setSubmitOpen(false);
+        updateCharData(tempCharacter);
     }
 
     const handleDelete = async () => {
