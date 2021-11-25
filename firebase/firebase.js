@@ -8,6 +8,7 @@ import {
     getFirestore,
     setDoc,
     updateDoc,
+    deleteDoc,
     increment,
     where,
     query,
@@ -69,6 +70,14 @@ export const updateCharacter = async (character) => {
   await updateDoc(characterRef, {
     ...character,
   })
+}
+
+export const deleteCharacter = async (uid) => {
+
+  const characterRef = doc(db, "characters", `${uid}`);
+  
+  await deleteDoc(characterRef);
+  
 }
 
 export default app;
