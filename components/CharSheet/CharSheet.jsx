@@ -14,6 +14,7 @@ import { FromClass } from './tabs/FromClass';
 import { FromRace } from './tabs/FromRace';
 import { FromBG } from './tabs/FromBG';
 import { ProfDisplay } from './tabs/ProfDisplay';
+import { SheetSubmitBox } from './components/SheetSubmitBox';
 
 const regexCheck = (prof) => {
     const regex = /skill-[a-zA-Z]+/i;
@@ -25,6 +26,9 @@ export const CharSheet = ({loadedChar}) => {
 
     const [tabValue, setTabValue] = useState(0);
     const [ready, setReady] = useState(false);
+    const [submitOpen, setSubmitOpen] = useState(false);
+    const [submitText, setSubmitText] = useState("");
+    const [submitFunc, setSubmitFunc] = useState(null);
 
     const handleChange = (event, newValue) => {
         setTabValue(newValue);
@@ -102,8 +106,22 @@ export const CharSheet = ({loadedChar}) => {
         setSkillProfs(tempSkill);
         setEquipProfs(tempEquip);
         setReady(true);
+
+        return () => {
+            loadedChar 
+            ? 
+            setTempCharacter({
+                fromClass: {},
+                fromRace: {},
+                fromBackground: {},
+                baseStats: {},
+                name: "Placeholder",
+            })
+            : null;
+        }
         
-    },[tempCharacter])
+    },[])
+
     
     // console.log(allProficiencies)
     // console.log("skillProfs",skillProfs)
@@ -115,7 +133,15 @@ export const CharSheet = ({loadedChar}) => {
 
     const { currentUser, userData, setUserData } = useAuth();
 
+    const handleConfirm = (text, func) => () => {
+        console.log("handleConfirm fired")
+        setSubmitText(text);
+        setSubmitFunc(func);
+        setSubmitOpen(true);
+    }
+
     const handleSave = async () => {
+        console.log("handleSave fired");
         await saveCharacter(tempCharacter, currentUser);
         setTempCharacter({
             fromClass: {},
@@ -131,25 +157,40 @@ export const CharSheet = ({loadedChar}) => {
                 characters: characterArray,
             }
             );
-    }
-    const handleUpdate = () => {
-        // console.log("handleUpdate triggered")
-        updateCharacter(tempCharacter)
+        
+        setSubmitOpen(false);
     }
 
+    const handleUpdate = () => {
+        console.log("handleUpdate fired");
+        updateCharacter(tempCharacter)
+        setSubmitOpen(false);
+    }
+
+    const handleDelete = () => {
+        console.log("handleDelete fired");
+        setSubmitOpen(false);
+    }
+
+
     return (
-        <>  
+        <>  <Box sx={{ml: loadedChar ? "5vw" : null, mr: "5vw"}}>
             {ready
             ?
             <>
             <h1>CharSheet.jsx</h1>
+            <Box sx={{width:"43em", display:"flex", flexDirection:"row-reverse", gap:"1em", mb:"2em"}}>
             {loadedChar
             ?
-            <Button color="secondary" variant="outlined" onClick={handleUpdate}>Confirm Edit</Button>
+            <>
+                <Button color="error" variant="outlined" onClick={handleConfirm("Are you sure you want to delete this character?", () => handleDelete)}>Delete Character</Button>
+                <Button color="secondary" variant="outlined" onClick={handleConfirm("Are you sure you want to confirm these updates?", () => handleUpdate)}>Confirm Edit</Button>
+            </>
             :
-            <Button color="secondary" variant="outlined" onClick={handleSave}>Save Character</Button>
+            <Button color="secondary" variant="outlined" onClick={handleConfirm("Are you sure you want to save this character?", () => handleSave)}>Save Character</Button>
             }
-            {/* <Button variant="contained" onClick={handleUpdate}>test update</Button> */}
+            </Box>
+            
             <Button variant="contained" onClick={()=>{console.log(tempCharacter)}}>log char</Button>
             <Button variant="contained" onClick={()=>{console.log(conMod)}}>log conMod</Button>
 
@@ -183,6 +224,11 @@ export const CharSheet = ({loadedChar}) => {
             :
             <LinearProgress />
             }
+
+            <SheetSubmitBox open={submitOpen} setOpen={setSubmitOpen} text={submitText} func={submitFunc} />
+            </Box>
+
+        <ToastContainer theme="dark"/>
         </>
     )
 }
