@@ -49,6 +49,16 @@ export const findMyCharacters = async (user) => {
   return characterArray;
 }
 
+export const findMyCustomBGs = async (user) => {
+  const q = query(collection(db, "custom_backgrounds"), where("creator", "==", user.uid));
+  const qSnapshotBGs = await getDocs(q);
+  const bgArray = [];
+  qSnapshotBGs.forEach((doc) => {
+    bgArray.push(doc.data());
+  })
+  return bgArray;
+}
+
 export const saveCharacter = async (thisChar, user) => {
 
   const newUid = uuidv4();
@@ -77,7 +87,22 @@ export const deleteCharacter = async (uid) => {
   const characterRef = doc(db, "characters", `${uid}`);
   
   await deleteDoc(characterRef);
-  
+
+}
+
+export const saveCustomBG = async (newBG, user) => {
+
+  const newUid = uuidv4();
+
+  await setDoc(
+    doc(db, "custom_backgrounds", `${newUid}`), 
+    {
+      ...newBG,
+      creator: user.uid,
+      uid: newUid,
+    },
+    { merge: false }
+    )
 }
 
 export default app;
