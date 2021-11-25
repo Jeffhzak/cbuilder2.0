@@ -8,14 +8,25 @@ import "react-toastify/dist/ReactToastify.css"
 import { useRouter } from "next/dist/client/router";
 import { useAuth } from "../../components/AuthContext";
 import { saveCustomBG } from '../../firebase/firebase';
+import axios from "axios";
+import { skillsApiGet } from '../../components/Stats/statsApiGet';
+import { CreateChoiceSelection } from '../../components/utility/CreateChoiceSelection';
 
 const cardStyle = {width:"53em", p:"1em", m:"0.5em", flexShrink:0, flexGrow:0};
 
-const CustomBackground = () => {
+const CustomBackground = ({allSkillsInfo}) => {
     
     const router = useRouter();
     const { currentUser, userData, setUserData } = useAuth();
     const [open, setOpen] = useState(false);
+
+    const [profChoices, setProfChoices] = useState(
+        {
+            choose: 2,
+            from: [...allSkillsInfo],
+            type: "starting_proficiencies"
+        }
+    )
     const [bgFormData, setBGFormData] = useState(
         {
             name: "",
@@ -420,6 +431,7 @@ const CustomBackground = () => {
         <Typography variant="subtitle1" mt="1em">A background represents how and where your character was in their backstory.</Typography>
         <Button variant="contained" color="secondary" onClick={openModal}>Save this background!</Button>
         <Button onClick={()=>console.log(bgFormData)}>Log bgFormData</Button>
+        <Button onClick={()=>console.log(allSkillsInfo)}>Log allSkillsInfo</Button>
         <Box sx={{display:"flex", flexWrap:"wrap"}}>
         <Card sx={cardStyle}>
             <Box sx={{display:"flex", gap:"1em", alignItems:"flex-end"}}>
@@ -438,6 +450,14 @@ const CustomBackground = () => {
             {descField()}
         </Card>
         {featuresFields()}
+        <Card sx={cardStyle}>
+            <Box sx={{display:"flex", gap:"1em", alignItems:"flex-end"}}>
+            <Typography variant="h5" mt="1em">{"Starting Proficiencies"}</Typography>
+            <Typography variant="subtitle2" color="GrayText" mt="1em">{"( Your background offers you proficiencies. )"}</Typography>
+            </Box>
+            <Divider/>
+            <CreateChoiceSelection choiceObject={profChoices} choices={bgFormData} setChoices={setBGFormData}/>
+        </Card>
         <Card sx={cardStyle}>
             <Box sx={{display:"flex", gap:"1em", alignItems:"flex-end"}}>
             <Typography variant="h5" mt="1em">{"Bonds"}</Typography>
@@ -483,5 +503,23 @@ export default CustomBackground;
 
 export async function getStaticProps() {
 
+    const URL = "https://www.dnd5eapi.co";
+
+    //! Skills Info
+    const skillRes = await axios.get(`${URL}/api/skills`);
+    const allSkillsInfo = [];
+    for (const thisSkill of skillRes.data.results) {
+        const skillName = thisSkill.index;
+
+        const thisSkillInfo = await skillsApiGet(skillName);
+
+        allSkillsInfo.push(thisSkillInfo);
+    }
+
+    return {  
+        props: {
+        allSkillsInfo: allSkillsInfo,
+        }
+    }
 
 }
