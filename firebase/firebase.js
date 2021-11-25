@@ -105,4 +105,12 @@ export const saveCustomBG = async (newBG, user) => {
     )
 }
 
+export const updateCustomBG = async (myBG) => {
+  const bgRef = doc(db, "custom_backgrounds", `${myBG.uid}`);
+
+  await updateDoc(bgRef, {
+    ...myBG,
+  })
+}
+
 export default app;
