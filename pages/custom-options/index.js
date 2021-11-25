@@ -17,7 +17,7 @@ const CustomOptions = () => {
 
             return customBGs.map((bgObj, index) => {
                 return (
-                    <BasicCard key={`${bgObj.name}_${bgObj.creator}`} text={bgObj.name} imageSrc="/placeholder-image.png" linkHref={`/custom-options/${index}`} />
+                    <BasicCard key={`${bgObj.name}_${bgObj.creator}`} text={bgObj.name} imageSrc="/placeholder-image.png" linkHref={`/custom-options/background/${index}`} />
                 )
             })
         }

@@ -1,21 +1,21 @@
 import { Button, Card, Divider, TextField, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
-import { useState } from "react"
-import { CBGSubmitBox } from '../../components/Custom-Background/CBGSubmitBox';
+import { useState, useEffect } from "react"
+import { CBGSubmitBox } from '../../../components/Custom-Background/CBGSubmitBox';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"
 import { useRouter } from "next/dist/client/router";
-import { useAuth } from "../../components/AuthContext";
-import { saveCustomBG } from '../../firebase/firebase';
+import { useAuth } from "../../../components/AuthContext";
+import { saveCustomBG, updateCustomBG } from '../../../firebase/firebase';
 import axios from "axios";
-import { skillsApiGet } from '../../components/Stats/statsApiGet';
-import { CreateChoiceSelection } from '../../components/utility/CreateChoiceSelection';
+import { skillsApiGet } from '../../../components/Stats/statsApiGet';
+import { CreateChoiceSelection } from '../../../components/utility/CreateChoiceSelection';
 
 const cardStyle = {width:"53em", p:"1em", m:"0.5em", flexShrink:0, flexGrow:0};
 
-const CustomBackground = ({allSkillsInfo}) => {
-    
+const CustomBackground = ({allSkillsInfo, loadedCustomBG}) => {
+    console.log(loadedCustomBG)
     const router = useRouter();
     const { currentUser, userData, setUserData } = useAuth();
     const [open, setOpen] = useState(false);
@@ -60,6 +60,12 @@ const CustomBackground = ({allSkillsInfo}) => {
             starting_proficiencies: [],
         }
     )
+    
+    useEffect(() => {
+        if (!!loadedCustomBG) {
+            setBGFormData(loadedCustomBG);
+        }
+    },[])
 
     const handleFormChangeBFIP = (index) => (event) => {
 
@@ -424,12 +430,30 @@ const CustomBackground = ({allSkillsInfo}) => {
 
     }
 
+    const handleUpdate = async () => {
+        await toast.promise(
+            updateCustomBG(bgFormData),
+            {
+                pending: "Updated your custom background...",
+                success: "Background updated!",
+            }, {
+                position: "top-center",
+                autoClose: 500,
+            });
+        
+    }
+
     return (
         <>
         <h1>CustomBackground.jsx</h1>
         <Typography variant="h4" mt="1em">Creating a custom Background:</Typography>
         <Typography variant="subtitle1" mt="1em">A background represents how and where your character was in their backstory.</Typography>
+        {loadedCustomBG
+        ?
+        <Button variant="contained" color="secondary" onClick={handleUpdate}>Update my background</Button>
+        :
         <Button variant="contained" color="secondary" onClick={openModal}>Save this background!</Button>
+        }
         <Button onClick={()=>console.log(bgFormData)}>Log bgFormData</Button>
         <Button onClick={()=>console.log(allSkillsInfo)}>Log allSkillsInfo</Button>
         <Box sx={{display:"flex", flexWrap:"wrap"}}>
