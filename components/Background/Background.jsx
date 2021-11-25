@@ -13,13 +13,14 @@ export const Background = ({allBackgroundInfo, successToast, setTab}) => {
     
     const renderBackgroundChoice = (allBackgroundInfo) => {
 
+        console.log(allBackgroundInfo)
         const bgIndexArray = Object.keys(allBackgroundInfo);
         const backgroundCardRender = bgIndexArray.map((bgIndex) => {
             const thisBGInfo = allBackgroundInfo[bgIndex];
             const thisBGIndex = thisBGInfo.index;
 
             return (
-                <BGCardMaker key={thisBGIndex+uuidv4()} index={thisBGIndex} setStateFunction={setPlayerBG} />
+                <BGCardMaker key={thisBGIndex+uuidv4()} index={thisBGIndex} setStateFunction={setPlayerBG} allBackgroundInfo={allBackgroundInfo}/>
             )
         })
 
