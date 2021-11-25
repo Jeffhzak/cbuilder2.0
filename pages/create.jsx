@@ -1,6 +1,6 @@
 import React from 'react'
 import { atom } from 'jotai';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Box } from '@mui/system';
 import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
@@ -15,9 +15,10 @@ import axios from "axios";
 import { classApiGet } from '../components/Class/classApiGet';
 import { raceApiGet } from '../components/Race/raceApiGet';
 import { backgroundApiGet } from '../components/Background/backgroundApiGet';
-import { statsApiGet, skillsApiGet } from '../components/Stats/statsApiGet';
+import { statsApiGet } from '../components/Stats/statsApiGet';
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"
+import "react-toastify/dist/ReactToastify.css";
+import { useAuth } from '../components/AuthContext';
 
 const sidebarWidthCollapsed = "5em";
 export const tempCharacterAtom = atom({
@@ -29,14 +30,39 @@ export const tempCharacterAtom = atom({
   image_url: "",
 });
 
-const Create = ({allClassInfo, allRaceInfo, allBackgroundInfo, allStatsInfo, allSkillsInfo}) => {
+const Create = ({allClassInfo, allRaceInfo, allBackgroundInfo, allStatsInfo}) => {
   const tempFunc = () => {
     console.log("allClassInfo",allClassInfo);
     console.log("allRaceInfo",allRaceInfo);
     console.log("allBackgroundInfo",allBackgroundInfo);
     console.log("allStatsInfo",allStatsInfo);
-    console.log("allSkillsInfo",allSkillsInfo);
   }
+
+  const { userData } = useAuth();
+  const bgRef = useRef(allBackgroundInfo);
+
+  useEffect(() => {
+
+    const customBGObj = {};
+    if (userData?.custom_backgrounds?.length >= 1) {
+      console.log("if-statement fired");
+      userData.custom_backgrounds.forEach((bgObj) => {
+        
+        customBGObj[bgObj.name] = {
+          ...bgObj, 
+          index: bgObj.name
+        }
+      })
+
+    }
+
+    bgRef.current = {
+      ...allBackgroundInfo,
+      ...customBGObj,
+    }
+    console.log("bgRef", bgRef);
+  },[])
+
 
   const [collapsed, setCollapsed] = useState(true)
 
@@ -59,7 +85,7 @@ const Create = ({allClassInfo, allRaceInfo, allBackgroundInfo, allStatsInfo, all
   const renderPage = () => {
     if (tab === 1) return (<Class allClassInfo={allClassInfo} successToast={successToast} setTab={setTab}/>);
     if (tab === 2) return (<Race allRaceInfo={allRaceInfo} successToast={successToast} setTab={setTab}/>);
-    if (tab === 3) return (<Background allBackgroundInfo={allBackgroundInfo} successToast={successToast} setTab={setTab}/>);
+    if (tab === 3) return (<Background allBackgroundInfo={bgRef.current} successToast={successToast} setTab={setTab}/>);
     if (tab === 4) return (<Stats allStatsInfo={allStatsInfo} successToast={successToast} setTab={setTab}/>);
     if (tab === 5) return (<CharPic successToast={successToast} setTab={setTab}/>);
     if (tab === 6) return (<CharSheet successToast={successToast} setTab={setTab}/>);
@@ -155,24 +181,12 @@ export async function getStaticProps() {
     allStatsInfo[statName] = thisStatInfo;
   }
 
-  //! Skills Info
-  const skillRes = await axios.get(`${URL}/api/skills`);
-  const allSkillsInfo = {};
-  for (const thisSkill of skillRes.data.results) {
-    const skillName = thisSkill.index;
-
-    const thisSkillInfo = await skillsApiGet(skillName);
-
-    allSkillsInfo[skillName] = thisSkillInfo;
-  }
-
   return {  
     props: {
       allClassInfo: allClassInfo,
       allRaceInfo: allRaceInfo,
       allBackgroundInfo: allBackgroundInfo,
       allStatsInfo: allStatsInfo,
-      allSkillsInfo: allSkillsInfo,
     }
   }
 }

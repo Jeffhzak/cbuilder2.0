@@ -3,7 +3,7 @@ import {bgTable} from "../../../references/bgTable";
 import Image from 'next/image';
 import React from 'react';
 
-export const BGCardMaker = ({index, setStateFunction}) => {
+export const BGCardMaker = ({index, setStateFunction, allBackgroundInfo}) => {
     const setBG = (value) => {
         setStateFunction(value);
     }
@@ -20,7 +20,7 @@ export const BGCardMaker = ({index, setStateFunction}) => {
                     alt={`${index}`}/>
                 </CardMedia>
                 <CardContent>
-                    <Typography gutterBottom variant="subtitle1">{bgTable[index].name}</Typography>
+                    <Typography gutterBottom variant="subtitle1">{bgTable[index]?.name ?? allBackgroundInfo[index]?.name}</Typography>
                 </CardContent>
             </CardActionArea>
         </Card>

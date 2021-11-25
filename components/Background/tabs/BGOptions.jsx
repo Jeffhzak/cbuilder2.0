@@ -34,22 +34,22 @@ export const BGOptions = ({selectedBGInfo, choices, setChoices}) => {
         {profOptions ? profOptions : "none"}
         <Typography variant="h6" mt="1em">Bonds:</Typography>
         <Divider/>
-        <Box className="rowStyle">
+        <Box>
             <CreatePSelection choiceObject={selectedBGInfo.bonds} choices={choices} setChoices={setChoices}/>
         </Box>
         <Typography variant="h6" mt="1em">Flaws:</Typography>
         <Divider/>
-        <Box className="rowStyle">
+        <Box>
             <CreatePSelection choiceObject={selectedBGInfo.flaws} choices={choices} setChoices={setChoices}/>
         </Box>
         <Typography variant="h6" mt="1em">Ideals:</Typography>
         <Divider/>
-        <Box className="rowStyle">
+        <Box>
             <CreatePSelection choiceObject={selectedBGInfo.ideals} choices={choices} setChoices={setChoices}/>
         </Box>
         <Typography variant="h6" mt="1em">Personality Traits:</Typography>
         <Divider/>
-        <Box className="rowStyle">
+        <Box>
             <CreatePSelection choiceObject={selectedBGInfo.personality_traits} choices={choices} setChoices={setChoices}/>
         </Box>
         </>

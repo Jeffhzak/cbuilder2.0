@@ -1,4 +1,5 @@
 import { Button, Grid, Typography } from '@mui/material'
+import { Box } from '@mui/system';
 import React from 'react'
 import {useState} from "react"
 
@@ -39,15 +40,9 @@ export const PSelectToggle = ({data, selectedCount, setSelectedCount, limitCap, 
     }
 
     return (
-        <Grid container spacing={0} 
-        alignItems="center"
-        justifyContent="center">
-            <Grid item xs={2}>
-                <Button variant={selected?"contained":"outlined"} color={selected?"success":undefined} sx={{m:"0.5em", minHeight:"40px", minWidth:"40px", maxHeight:"40px", maxWidth:"40px"}} onClick={handleClick}>{inChoices ? <h2>✓</h2> : null}</Button>
-            </Grid>
-            <Grid item xs={10}>
-                <Typography variant="h7">{data}</Typography>
-            </Grid>
-        </Grid>
+        <Box sx={{display:"flex", gap:"1em", alignItems:"center"}}>
+            <Button variant={selected?"contained":"outlined"} color={selected?"success":undefined} sx={{m:"0.5em", minHeight:"40px", minWidth:"40px", maxHeight:"40px", maxWidth:"40px"}} onClick={handleClick}>{inChoices ? <h2>✓</h2> : null}</Button>
+            <Typography variant="h7">{data}</Typography>
+        </Box>
     )
 }
