@@ -42,8 +42,8 @@ export const PointBuy = ({stats, setStats, statDescriptions, pbScore, setPbScore
     return (
         <>
             <Button variant="contained" onClick={()=>{setPBorSA("")}}>Go Back</Button>
-            <Button onClick={()=>console.log(stats)}>log stats</Button>
-            <h3>pointbuy.jsx</h3>
+            {/* <Button onClick={()=>console.log(stats)}>log stats</Button>
+            <h3>pointbuy.jsx</h3> */}
             <Typography variant="h5">Points remaining: {pbScore}</Typography>
 
             {renderStatGrid()}

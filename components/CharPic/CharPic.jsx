@@ -34,8 +34,8 @@ export const CharPic = ({successToast, setTab}) => {
     }
 
     return (
-        <>
-            <h1>CharPic.jsx</h1>
+        <div className="page_wrapper">
+            {/* <h1>CharPic.jsx</h1> */}
             <Box sx={{display:"flex"}}>
             <TextField
                 required
@@ -66,6 +66,6 @@ export const CharPic = ({successToast, setTab}) => {
                 blurDataURL="/placeholder-image.png"
                 />
             </Box>
-        </>
+        </div>
     )
 }

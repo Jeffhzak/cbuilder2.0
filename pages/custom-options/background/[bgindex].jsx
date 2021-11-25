@@ -20,7 +20,7 @@ const CBGShow = ({allSkillsInfo}) => {
 
     return (
         <>  
-            <h1>CBGShow.jsx</h1>
+            {/* <h1>CBGShow.jsx</h1> */}
             <CustomBackground allSkillsInfo={allSkillsInfo} loadedCustomBG={loadedCustomBG}/>
         </>
     )

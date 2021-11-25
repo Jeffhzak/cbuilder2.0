@@ -85,10 +85,10 @@ export const BackgroundInfo = ({playerBG, setPlayerBG, selectedBGInfo, successTo
 
     return (
         <>
-            <h1>BackgroundInfo.jsx</h1>
+            {/* <h1>BackgroundInfo.jsx</h1> */}
             <Button variant="contained" onClick={()=>{setPlayerBG("")}}>Go Back</Button>
-            <Button variant="contained" onClick={()=>{console.log(selectedBGInfo)}}>Log BGInfo</Button>
-            <Button variant="contained" onClick={()=>{console.log(choices)}}>Log Choices</Button>
+            {/* <Button variant="contained" onClick={()=>{console.log(selectedBGInfo)}}>Log BGInfo</Button>
+            <Button variant="contained" onClick={()=>{console.log(choices)}}>Log Choices</Button> */}
             <Box sx={{width: "100%"}}>
                 <Typography variant="h5">You selected:</Typography>
                 <Typography variant="h5">The {selectedBGInfo?.name}</Typography>

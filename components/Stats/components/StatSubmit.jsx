@@ -38,8 +38,8 @@ export const StatSubmit = ({open, setOpen, stats, successToast, setTab}) => {
     }
     return (
         <>
-            <h1>PBSubmit.jsx</h1>
-            <button onClick={()=>{console.log(tempCharacter)}}>log characterAtom</button>
+            {/* <h1>PBSubmit.jsx</h1>
+            <button onClick={()=>{console.log(tempCharacter)}}>log characterAtom</button> */}
         <Modal
             open={open}
             onClose={handleSubmitClose}

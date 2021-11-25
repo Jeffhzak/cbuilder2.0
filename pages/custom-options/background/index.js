@@ -445,7 +445,7 @@ const CustomBackground = ({allSkillsInfo, loadedCustomBG}) => {
 
     return (
         <>
-        <h1>CustomBackground.jsx</h1>
+        {/* <h1>CustomBackground.jsx</h1> */}
         <Typography variant="h4" mt="1em">Creating a custom Background:</Typography>
         <Typography variant="subtitle1" mt="1em">A background represents how and where your character was in their backstory.</Typography>
         {loadedCustomBG
@@ -454,8 +454,8 @@ const CustomBackground = ({allSkillsInfo, loadedCustomBG}) => {
         :
         <Button variant="contained" color="secondary" onClick={openModal}>Save this background!</Button>
         }
-        <Button onClick={()=>console.log(bgFormData)}>Log bgFormData</Button>
-        <Button onClick={()=>console.log(allSkillsInfo)}>Log allSkillsInfo</Button>
+        {/* <Button onClick={()=>console.log(bgFormData)}>Log bgFormData</Button>
+        <Button onClick={()=>console.log(allSkillsInfo)}>Log allSkillsInfo</Button> */}
         <Box sx={{display:"flex", flexWrap:"wrap"}}>
         <Card sx={cardStyle}>
             <Box sx={{display:"flex", gap:"1em", alignItems:"flex-end"}}>

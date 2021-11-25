@@ -55,7 +55,7 @@ export const RaceFeatures = ({selectedRaceInfo, choices, setChoices}) => {
 
     return (
         <>
-            <h1>RaceFeatures.jsx</h1>
+            {/* <h1>RaceFeatures.jsx</h1> */}
             <Box className="colStyle">
                 <Typography variant="h6" mt="1em">
                     Ability Score Bonuses

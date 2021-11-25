@@ -218,7 +218,7 @@ export const CharSheet = ({loadedChar, removeCharFromUser, updateCharData}) => {
         <>
         <Box sx={{ml: loadedChar ? "5vw" : "0", mr: "5vw"}}>
             
-            <h1>CharSheet.jsx</h1>
+            {/* <h1>CharSheet.jsx</h1> */}
             <Box sx={{width:"43em", display:"flex", flexDirection:"row-reverse", gap:"1em", mb:"2em"}}>
             {loadedChar
             ?
@@ -231,8 +231,8 @@ export const CharSheet = ({loadedChar, removeCharFromUser, updateCharData}) => {
             }
             </Box>
             
-            <Button variant="contained" onClick={()=>{console.log(tempCharacter)}}>log char</Button>
-            <Button variant="contained" onClick={()=>{console.log(conMod)}}>log conMod</Button>
+            {/* <Button variant="contained" onClick={()=>{console.log(tempCharacter)}}>log char</Button>
+            <Button variant="contained" onClick={()=>{console.log(conMod)}}>log conMod</Button> */}
 
 
             <SummaryCard characterData={tempCharacter} setTempCharacter={setTempCharacter} />

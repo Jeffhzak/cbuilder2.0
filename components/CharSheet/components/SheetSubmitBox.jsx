@@ -11,7 +11,7 @@ export const SheetSubmitBox = ({open, setOpen, text, func}) => {
 
     return (
         <>
-            <h1>SheetSubmitBox.jsx</h1>
+            {/* <h1>SheetSubmitBox.jsx</h1> */}
             <Modal
             open={open}
             onClose={handleSubmitClose}

@@ -25,12 +25,12 @@ const CustomOptions = () => {
 
  return(
     <Box className="page_wrapper">
-    <h1>CustomOptions.js</h1>
+    {/* <h1>CustomOptions.js</h1> */}
     <Typography variant="h5" mt="1em">{"Create a new custom option!"}</Typography>
     <Divider/>
     <Box sx={{display:"flex"}}>
         <BasicCard text="Create Custom Background" imageSrc="/placeholder-image.png" linkHref="/custom-options/background" />
-        <BasicCard text="Create Custom Race" imageSrc="/placeholder-image.png" linkHref="/custom-options/race" />
+        {/* <BasicCard text="Create Custom Race" imageSrc="/placeholder-image.png" linkHref="/custom-options/race" /> */}
     </Box>
     <Typography variant="h5" mt="1em">{"My Custom Backgrounds:"}</Typography>
     <Divider/>

@@ -28,8 +28,8 @@ export const Background = ({allBackgroundInfo, successToast, setTab}) => {
     }
     return (
         <>
-            <h1>Background.jsx</h1>
-            <h1>{playerBG}</h1>
+            {/* <h1>Background.jsx</h1>
+            <h1>{playerBG}</h1> */}
             {playerBG.length === 0
             ?
             <>

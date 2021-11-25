@@ -24,7 +24,7 @@ const ThisChar = () => {
     }
 
     const removeCharFromUser = (uid) => {
-        console.log("removeChar fired")
+        // console.log("removeChar fired")
         const newCharArray = userData.characters.filter((character) => {
             if (character.uid !== uid) return true;
             else return false;
@@ -37,7 +37,7 @@ const ThisChar = () => {
 
     return(
         <Box className="page_wrapper">
-        <h1>UID: {thisChar.uid}</h1>
+        {/* <h1>UID: {thisChar.uid}</h1> */}
         <CharSheet loadedChar={thisChar} removeCharFromUser={removeCharFromUser} updateCharData={updateCharData}/>
         </Box>
     )

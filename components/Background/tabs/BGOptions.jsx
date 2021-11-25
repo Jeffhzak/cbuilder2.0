@@ -25,7 +25,7 @@ export const BGOptions = ({selectedBGInfo, choices, setChoices}) => {
     
     return (
         <>
-        <h1>BGOptions.jsx</h1>
+        {/* <h1>BGOptions.jsx</h1> */}
         <Typography variant="h6" mt="1em"> Proficiencies gained:</Typography>
         <Divider/>
         {defaultProfs ? defaultProfs : "none"}

@@ -60,10 +60,10 @@ export const RaceInfo = ({ playerRace, setPlayerRace, selectedRaceInfo, successT
     
     return (
         <div>
-            <h1>RaceInfo.jsx</h1>
+            {/* <h1>RaceInfo.jsx</h1> */}
             <Button variant="contained" onClick={()=>{setPlayerRace("")}}>Go Back</Button>
-            <Button variant="contained" onClick={()=>{console.log(selectedRaceInfo)}}>Log RaceInfo</Button>
-            <Button variant="contained" onClick={()=>{console.log(choices)}}>Log Choices</Button>
+            {/* <Button variant="contained" onClick={()=>{console.log(selectedRaceInfo)}}>Log RaceInfo</Button> */}
+            {/* <Button variant="contained" onClick={()=>{console.log(choices)}}>Log Choices</Button> */}
             <Box sx={{width: "100%"}}>
                 <Typography variant="h5">You selected:</Typography>
                 <Typography variant="h5">The {selectedRaceInfo?.name}</Typography>

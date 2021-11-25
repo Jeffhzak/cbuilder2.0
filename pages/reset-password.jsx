@@ -1,4 +1,4 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, Card, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import { useAuth } from "../components/AuthContext";
@@ -56,8 +56,8 @@ const Reset_password = () => {
     }
     return (
         <>
-            <h1>reset_password.jsx</h1>
-            <Box component="form" sx={{m: 1, width: '25em', display:"flex", flexDirection:"column", alignItems:"center"}}>
+            {/* <h1>reset_password.jsx</h1> */}
+            <Card component="form" sx={{m: 1, width: '25em', display:"flex", flexDirection:"column", alignItems:"center", p:"1em", margin:"auto"}}> 
 
                 <TextField
                 required
@@ -74,7 +74,7 @@ const Reset_password = () => {
                     <Typography variant="subtitle2" display="inline">New user? </Typography>
                     <Typography variant="subtitle2" className="link" display="inline"><Link href="/signup">Sign up here!</Link></Typography>
                 </Box>
-            </Box>
+            </Card>
         <ToastContainer theme="dark"/>
         </>
     )
