@@ -140,9 +140,17 @@ export const CharSheet = ({loadedChar, removeCharFromUser, updateCharData}) => {
 
     const handleConfirm = (text, func) => () => {
         console.log("handleConfirm fired")
-        setSubmitText(text);
-        setSubmitFunc(func);
-        setSubmitOpen(true);
+        if (!!currentUser) {
+            setSubmitText(text);
+            setSubmitFunc(func);
+            setSubmitOpen(true);
+        }
+        else {
+            toast.error("You have to be logged in to save a Character!", {
+                position: "top-center",
+                autoClose: 5000,
+            })
+        }
     }
 
     const handleSave = async () => {

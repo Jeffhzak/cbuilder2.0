@@ -47,7 +47,7 @@ export const AuthProvider = ({children}) => {
     }
 
     const logout = () => {
-        return auth.signOut();
+        return auth.signOut().then(setUserData({}));
     }
 
     const resetPassword = (email) => {
