@@ -1,7 +1,9 @@
 # CBuilder 2.0
 
 A Challenge to myself: how much can I improve on a previous project in 2 weeks, now at the end of my General Assembly Software Engineering Immersive Bootcamp?
+
 Original Project: https://github.com/Jeffhzak/dndcbuilder
+
 Visit the deployment site here: cbuilder2-0.vercel.app
 
 # Description
@@ -13,6 +15,7 @@ Version 2.0 of my original D&D Character Builder website. As before, the User wi
 >* NextJS
 
 Chosen to leverage on NextJS's fantastic Static Site generation feature. An identified pain point of the UX of version 1.0 was the irritating load times whenenver the site had to fetch information from an API (which was very often). 
+
 Being able to fetch all the information I need at build time, and use it as a static prop throughout the website was a godsend. The site is now incredibly snappy and responsive. 
 
 >* Firebase
