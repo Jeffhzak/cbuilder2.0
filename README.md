@@ -1,34 +1,26 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# CBuilder 2.0
 
-## Getting Started
+A Challenge to myself: how much can I improve on a previous project in 2 weeks, now at the end of my General Assembly Software Engineering Immersive Bootcamp?
+Original Project: https://github.com/Jeffhzak/dndcbuilder
+Visit the deployment site here: cbuilder2-0.vercel.app
 
-First, run the development server:
+# Description
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Version 2.0 of my original D&D Character Builder website. As before, the User will be guided through the surprisingly complicated process of creating a Level 1 Dungeons & Dragons character, using information freely available in the public API. Their abilities and skills will be displayed in a clear and easy to read format, to be able to easily plan out your character as you progress through the steps. 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Tech Stack
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+>* NextJS
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Chosen to leverage on NextJS's fantastic Static Site generation feature. An identified pain point of the UX of version 1.0 was the irritating load times whenenver the site had to fetch information from an API (which was very often). 
+Being able to fetch all the information I need at build time, and use it as a static prop throughout the website was a godsend. The site is now incredibly snappy and responsive. 
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+>* Firebase
 
-## Learn More
+Chosen as a low maintenance, complete package to serve as a backend. I required a noSQL database to easily translate and "save" the data that comprises a "character", and Firebase provided all the functionality I needed to be able to hit the ground running and focus on developing features, saving on precious time.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## MVP
+* Translate all the functionality of version 1.0 into the new React framework I'm learning, NextJS.
+* Simultaneously, address fundamental planning flaws in the features I had implemented, made obvious thanks to 20/20 hindsight. 
+* User authentication via Firebase => adding functionality to be able to save your created character, and easily reference it in the future. 
+* Creating an easily scaleable system for *users* to be able to create and use their own custom features during character creation. 
