@@ -13,19 +13,26 @@ export const SummaryCard = ({characterData, setTempCharacter}) => {
     const charClass = characterData?.fromClass?.selectedClassInfo?.class?.name ?? "<Class>";
     const portraitURL = characterData?.image_url;
 
+    const imageSrcLogic = () => {
+        if (portraitURL.size) return URL.createObjectURL(portraitURL);
+        if (portraitURL.length > 0) return `/api/imageproxy?url=${encodeURIComponent(imagePreviewURL)}`;
+        else return "/placeholder-image.png";
+    }
+
 
     return (
         <Card sx={{ width:"30em", m:"1em", ml:"5em", display: 'flex', justifyContent:"left" }}>
             <CardMedia >
                 <Box sx={{width:"150px", height:"150px", position:"relative", backgroundColor:"#07212e"}}>
                     <Image 
-                    src={
-                        portraitURL?.length > 0
-                        ?
-                        `/api/imageproxy?url=${encodeURIComponent(portraitURL)}`
-                        :
-                        "/placeholder-image.png"
-                        } 
+                    // src={
+                    //     portraitURL?.length > 0
+                    //     ?
+                    //     `/api/imageproxy?url=${encodeURIComponent(portraitURL)}`
+                    //     :
+                    //     "/placeholder-image.png"
+                    //     } 
+                    src={imageSrcLogic()}
                     alt="Character Portrait" 
                     layout="fill"
                     objectFit="contain"

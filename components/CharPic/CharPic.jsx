@@ -6,7 +6,6 @@ import { Button, TextField, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import Image from 'next/image';
 import { useDropzone } from 'react-dropzone';
-import axios from "axios";
 
 
 
@@ -30,7 +29,7 @@ export const CharPic = ({successToast, setTab}) => {
         setTempCharacter(
             {
                 ...tempCharacter,
-                image_url: url,
+                image_url: uploadedFiles.length > 0 ? uploadedFiles[0] : url,
             }
         );
         successToast("Picture saved!");
@@ -76,7 +75,7 @@ export const CharPic = ({successToast, setTab}) => {
                 <div
                     {...getRootProps()}
                     style={{
-                        height: "250px",
+                        height: "125px",
                         border: "2px dashed #b1a7a6",
                         display: "flex",
                         alignItems: "center",
